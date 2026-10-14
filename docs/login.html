@@ -147,6 +147,11 @@
         });
 
         function doLogin(username, password) {
+            const alertEl = document.getElementById('loginAlert');
+            const textEl = document.getElementById('loginAlertText');
+            alertEl.classList.remove('d-flex');
+            alertEl.classList.add('d-none');
+
             const res = db.login(username, password);
             if (res.success) {
                 if (res.user.role === 'ADMIN' || res.user.role === 'LIBRARIAN') {
@@ -155,8 +160,6 @@
                     window.location.href = 'student/dashboard.html';
                 }
             } else {
-                const alertEl = document.getElementById('loginAlert');
-                const textEl = document.getElementById('loginAlertText');
                 textEl.textContent = res.message || 'Invalid username or password.';
                 alertEl.classList.remove('d-none');
                 alertEl.classList.add('d-flex');

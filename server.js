@@ -271,6 +271,14 @@ function renderPage(viewPath, context = {}) {
     const activePage = context.activePage || '';
     html = html.replace(/\$\{activePage\s*==\s*['"]([^'"]+)['"]\s*\?\s*['"]active['"]\s*:\s*['"]['"]\}/g, (m, p) => (p === activePage ? 'active' : ''));
 
+    // Pre-filled login credentials for PBL demo
+    const role = context.role || '';
+    const defUser = context.defaultUser || (role === 'ADMIN' ? 'admin' : (role === 'STUDENT' ? 'aman' : ''));
+    const defPass = context.defaultPass || (role === 'ADMIN' ? 'admin123' : (role === 'STUDENT' ? 'student123' : ''));
+    html = html.split("${prevUsername != null ? prevUsername : (param.role == 'ADMIN' ? 'admin' : (param.role == 'STUDENT' ? 'aman' : ''))}").join(defUser);
+    html = html.split("${param.role == 'ADMIN' ? 'admin123' : (param.role == 'STUDENT' ? 'student123' : '')}").join(defPass);
+    html = html.replace(/\$\{param\.role\}/g, role);
+
     // Replace contextual expressions
     const replacements = {
         '${pageContext.request.contextPath}': '',
@@ -409,10 +417,40 @@ function renderPage(viewPath, context = {}) {
 // HTTP SERVER & REQUEST DISPATCHER
 // --------------------------------------------------------------------
 const server = http.createServer((req, res) => {
+    const startTime = Date.now();
     const parsedUrl = url.parse(req.url, true);
     const pathname = parsedUrl.pathname;
     const query = parsedUrl.query;
     const currentUser = getSessionUser(req);
+
+    // Automatic HTTP Request Logger
+    res.on('finish', () => {
+        const duration = Date.now() - startTime;
+        const userTag = currentUser ? `[${currentUser.username}:${currentUser.role}]` : '[Guest]';
+        const statusColor = res.statusCode >= 500 ? '\x1b[31m' : res.statusCode >= 400 ? '\x1b[33m' : res.statusCode >= 300 ? '\x1b[36m' : '\x1b[32m';
+        const resetColor = '\x1b[0m';
+        console.log(`[DLMS ${new Date().toLocaleTimeString()}] ${req.method} ${pathname} -> ${statusColor}${res.statusCode}${resetColor} (${duration}ms) ${userTag}`);
+    });
+
+    // Static files in /docs or root index.html (supports local GitHub Pages evaluation)
+    if (pathname.startsWith('/docs/') || pathname === '/index.html') {
+        const relativePath = pathname === '/index.html' ? 'index.html' : pathname.replace(/^\//, '');
+        const filePath = path.join(__dirname, relativePath);
+        if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+            const ext = path.extname(filePath).toLowerCase();
+            const mimeTypes = {
+                '.html': 'text/html; charset=utf-8',
+                '.css': 'text/css',
+                '.js': 'application/javascript',
+                '.png': 'image/png',
+                '.jpg': 'image/jpeg',
+                '.svg': 'image/svg+xml',
+                '.json': 'application/json'
+            };
+            res.writeHead(200, { 'Content-Type': mimeTypes[ext] || 'text/plain' });
+            return fs.createReadStream(filePath).pipe(res);
+        }
+    }
 
     // 1. Static Assets Delivery (.css, .js, images)
     if (pathname.startsWith('/assets/')) {
@@ -439,7 +477,7 @@ const server = http.createServer((req, res) => {
     }
 
     // 3. Authentication: Login & Logout
-    if (pathname === '/login') {
+    if (pathname === '/login' || pathname === '/login.html') {
         if (req.method === 'POST') {
             let body = '';
             req.on('data', chunk => { body += chunk; });
@@ -447,10 +485,19 @@ const server = http.createServer((req, res) => {
                 const params = querystring.parse(body);
                 const username = (params.username || '').trim();
                 const password = (params.password || '').trim();
+                const uLower = username.toLowerCase();
 
-                const user = db.users.find(u => (u.username === username || u.email === username) && u.password === password && u.status === 'ACTIVE');
+                console.log(`[DLMS AUTH] Processing login credentials for user/email: "${username}"`);
+
+                const user = db.users.find(u => 
+                    (u.username.toLowerCase() === uLower || (u.email && u.email.toLowerCase() === uLower)) && 
+                    u.password === password && 
+                    u.status === 'ACTIVE'
+                );
+
                 if (user) {
                     setSessionUser(res, user);
+                    console.log(`\x1b[32m[DLMS AUTH]\x1b[0m Login SUCCESS: "${user.username}" (${user.role}) authenticated successfully.`);
                     if (user.role === 'ADMIN' || user.role === 'LIBRARIAN') {
                         res.writeHead(302, { 'Location': '/admin/dashboard' });
                     } else {
@@ -458,6 +505,7 @@ const server = http.createServer((req, res) => {
                     }
                     return res.end();
                 } else {
+                    console.warn(`\x1b[33m[DLMS AUTH]\x1b[0m Login FAILED: Invalid credentials for username/email: "${username}".`);
                     res.writeHead(302, { 'Location': '/login?error=Invalid username or password' });
                     return res.end();
                 }
@@ -466,13 +514,25 @@ const server = http.createServer((req, res) => {
         }
 
         // GET /login
-        const rendered = renderPage('login.jsp', { user: currentUser, query: query.role, error: query.error, msg: query.msg });
+        const role = query.role || '';
+        const defaultUser = role === 'ADMIN' ? 'admin' : (role === 'STUDENT' ? 'aman' : '');
+        const defaultPass = role === 'ADMIN' ? 'admin123' : (role === 'STUDENT' ? 'student123' : '');
+        const rendered = renderPage('login.jsp', { 
+            user: currentUser, 
+            role: role, 
+            defaultUser: defaultUser, 
+            defaultPass: defaultPass, 
+            error: query.error, 
+            msg: query.msg 
+        });
         res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' });
         return res.end(rendered);
     }
 
     if (pathname === '/logout') {
+        const username = currentUser ? currentUser.username : 'Unknown';
         clearSession(res);
+        console.log(`\x1b[36m[DLMS AUTH]\x1b[0m Logout: User "${username}" signed out.`);
         res.writeHead(302, { 'Location': '/login?msg=You have been logged out securely.' });
         return res.end();
     }
@@ -688,9 +748,11 @@ const server = http.createServer((req, res) => {
                         remarks: 'Issued successfully'
                     });
 
+                    console.log(`\x1b[32m[DLMS CIRCULATION]\x1b[0m Issued Book "${book.bookId}" (${book.title}) to Member "${member.memberId}" (${member.name}). Due: ${dueDate}`);
                     res.writeHead(302, { 'Location': '/admin/transactions?success=Book issued successfully!' });
                     return res.end();
                 } else {
+                    console.warn(`\x1b[33m[DLMS CIRCULATION]\x1b[0m Failed to issue Book: "${p.bookId}" to Member: "${p.memberId}"`);
                     res.writeHead(302, { 'Location': '/admin/issue?error=Book unavailable or quota exceeded.' });
                     return res.end();
                 }
@@ -745,8 +807,11 @@ const server = http.createServer((req, res) => {
                         });
                     }
 
+                    console.log(`\x1b[32m[DLMS CIRCULATION]\x1b[0m Book "${tx.bookId}" returned for TXN "${tx.transactionId}". Days Late: ${daysLate}, Fine: ₹${tx.fine}`);
                     res.writeHead(302, { 'Location': '/admin/transactions?success=Book returned successfully.' });
                     return res.end();
+                } else {
+                    console.warn(`\x1b[33m[DLMS CIRCULATION]\x1b[0m Return failed for TXN: "${p.transactionId}"`);
                 }
             });
             return;
@@ -938,6 +1003,7 @@ const server = http.createServer((req, res) => {
                     fine.status = 'PAID';
                     fine.paidAt = new Date().toLocaleString();
                     fine.paymentMode = p.paymentMode || 'CASH';
+                    console.log(`\x1b[32m[DLMS FINES]\x1b[0m Fine "${fine.fineId}" settled: ₹${fine.amount} recorded via ${fine.paymentMode}.`);
                 }
                 res.writeHead(302, { 'Location': '/admin/fines?success=Fine payment recorded.' });
                 return res.end();

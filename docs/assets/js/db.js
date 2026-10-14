@@ -77,13 +77,18 @@ class DLMSDatabase {
         try {
             const raw = localStorage.getItem(DLMS_STORAGE_KEY);
             if (raw) {
-                return JSON.parse(raw);
+                const parsed = JSON.parse(raw);
+                if (parsed && Array.isArray(parsed.users) && parsed.users.length > 0 && Array.isArray(parsed.books) && Array.isArray(parsed.members)) {
+                    console.log(`[DLMS DB] Loaded state from localStorage (${parsed.books.length} books, ${parsed.members.length} members).`);
+                    return parsed;
+                }
             }
         } catch (e) {
-            console.warn('LocalStorage error, using in-memory state.', e);
+            console.warn('[DLMS DB] LocalStorage parse error, resetting state.', e);
         }
         const clone = JSON.parse(JSON.stringify(INITIAL_DATA));
         this.save(clone);
+        console.log(`[DLMS DB] Initialized fresh seed state (${clone.books.length} books, ${clone.users.length} users).`);
         return clone;
     }
 
@@ -92,7 +97,7 @@ class DLMSDatabase {
         try {
             localStorage.setItem(DLMS_STORAGE_KEY, JSON.stringify(data));
         } catch (e) {
-            console.error('Failed to save to localStorage', e);
+            console.error('[DLMS DB] Failed to save state to localStorage', e);
         }
     }
 
@@ -100,6 +105,7 @@ class DLMSDatabase {
         localStorage.removeItem(DLMS_STORAGE_KEY);
         this.data = JSON.parse(JSON.stringify(INITIAL_DATA));
         this.save(this.data);
+        console.log('[DLMS DB] Database reset to factory seed data.');
     }
 
     // ---------------- AUTH & SESSION ----------------
@@ -116,15 +122,29 @@ class DLMSDatabase {
     }
 
     login(username, password) {
-        const user = this.data.users.find(u => (u.username === username || u.email === username) && u.password === password);
+        const u = (username || '').trim().toLowerCase();
+        const p = (password || '').trim();
+        console.log(`[DLMS Client Auth] Verifying login credentials for user/email: "${u}"`);
+
+        const user = this.data.users.find(usr => 
+            (usr.username.toLowerCase() === u || (usr.email && usr.email.toLowerCase() === u)) && 
+            usr.password === p &&
+            usr.status === 'ACTIVE'
+        );
+
         if (user) {
             this.setCurrentUser(user);
+            console.log(`[DLMS Client Auth] Login SUCCESS: "${user.username}" authenticated as ${user.role}.`);
             return { success: true, user };
         }
-        return { success: false, message: 'Invalid username or password.' };
+
+        console.warn(`[DLMS Client Auth] Login FAILED: No matching active user found for "${u}".`);
+        return { success: false, message: 'Invalid username or password. Use demo: admin / admin123 or aman / student123' };
     }
 
     logout() {
+        const currentUser = this.getCurrentUser();
+        console.log(`[DLMS Client Auth] User "${currentUser ? currentUser.username : 'Unknown'}" signed out.`);
         localStorage.removeItem(DLMS_USER_KEY);
     }
 
