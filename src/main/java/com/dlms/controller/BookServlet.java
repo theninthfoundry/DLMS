@@ -64,7 +64,11 @@ public class BookServlet extends HttpServlet {
         } catch (Exception e) {
             req.setAttribute("errorMessage", "Error saving book: " + e.getMessage());
             req.setAttribute("book", extractBookFromRequest(req));
-            showAddForm(req, resp);
+            try {
+                showAddForm(req, resp);
+            } catch (DatabaseOperationException de) {
+                throw new ServletException(de);
+            }
         }
     }
 

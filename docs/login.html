@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
 </head>
-<body style="background-color: #FFFFFF !important; color: #000000 !important;">
+<body>
 
     <div class="min-vh-100 d-flex flex-column justify-content-center py-5">
         <div class="container">
@@ -26,7 +26,7 @@
                     <!-- White Card with Crisp Black Border -->
                     <div class="glass-card p-4 p-sm-5 border border-2 border-dark rounded-3">
                         <div class="text-center mb-4">
-                            <div class="rounded-2 p-2 d-inline-flex align-items-center justify-content-center mb-2 text-white" style="background: #000000; width: 48px; height: 48px;">
+                            <div class="rounded-2 p-2 brand-icon-48 mb-2 text-white">
                                 <i class="bi bi-book-half text-white fs-3"></i>
                             </div>
                             <h3 class="fw-bold mb-1">Sign In to DLMS</h3>
@@ -50,7 +50,7 @@
                                 <label class="form-label small fw-semibold">Password</label>
                                 <div class="input-group">
                                     <input type="password" id="passwordInput" class="form-control" placeholder="Enter password" required>
-                                    <button class="btn btn-outline-custom" type="button" id="togglePasswordBtn">
+                                    <button class="btn btn-outline-custom" type="button" id="togglePasswordBtn" title="Toggle password visibility" aria-label="Toggle password visibility">
                                         <i class="bi bi-eye" id="passwordIcon"></i>
                                     </button>
                                 </div>

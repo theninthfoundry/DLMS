@@ -11,21 +11,21 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
 </head>
-<body style="background-color: #FFFFFF !important; color: #000000 !important;">
+<body>
 
     <!-- Toast Notification Container -->
     <div id="toastContainer"></div>
 
     <!-- Public Landing Navigation Bar -->
-    <nav class="navbar navbar-expand-lg fixed-top py-3" style="background: #FFFFFF !important; border-bottom: 2px solid #000000 !important;">
+    <nav class="navbar navbar-expand-lg fixed-top py-3 landing-nav">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-dark" href="index.html" style="text-decoration: none;">
-                <div class="rounded-2 p-2 d-flex align-items-center justify-content-center text-white" style="background: #000000; width: 36px; height: 36px;">
+            <a class="navbar-brand d-flex align-items-center gap-2 fw-bold text-dark text-decoration-none" href="index.html">
+                <div class="rounded-2 p-2 brand-icon-36 text-white">
                     <i class="bi bi-book-half text-white fs-5"></i>
                 </div>
                 <span>DLMS.EDU</span>
             </a>
-            <button class="navbar-toggler border-1 border-dark" type="button" data-bs-toggle="collapse" data-bs-target="#landingNavbar">
+            <button class="navbar-toggler border-1 border-dark" type="button" data-bs-toggle="collapse" data-bs-target="#landingNavbar" title="Toggle navigation" aria-label="Toggle navigation">
                 <i class="bi bi-list fs-2 text-dark"></i>
             </button>
             <div class="collapse navbar-collapse" id="landingNavbar">
@@ -48,15 +48,15 @@
     </nav>
 
     <!-- HERO SECTION (White & Black) -->
-    <section class="hero-section text-center text-lg-start" style="padding-top: 7rem;">
+    <section class="hero-section text-center text-lg-start hero-padding-top">
         <div class="container">
             <div class="row align-items-center py-4">
                 <div class="col-lg-7 mb-5 mb-lg-0">
                     <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-2 mb-4 border border-dark">
-                        <i class="bi bi-circle-fill" style="font-size: 8px;"></i>
+                        <i class="bi bi-circle-fill fs-8"></i>
                         <span class="small fw-bold text-uppercase">B.Tech PBL Project • Team: Aman & Jashwanth</span>
                     </div>
-                    <h1 class="display-3 fw-extrabold mb-3" style="line-height: 1.15; letter-spacing: -0.03em;">
+                    <h1 class="display-3 fw-extrabold mb-3 hero-title-styled">
                         Digital Library<br>Management System
                     </h1>
                     <p class="lead mb-4 pe-lg-5 fs-5 text-muted">
@@ -138,7 +138,7 @@
     </section>
 
     <!-- LIVE METRICS BAR -->
-    <section class="py-5" id="statistics" style="background: #FFFFFF; border-bottom: 2px solid #000000;">
+    <section class="py-5 section-border-bottom" id="statistics">
         <div class="container">
             <div class="row g-4 text-center">
                 <div class="col-6 col-md-3">
@@ -170,7 +170,7 @@
     </section>
 
     <!-- INTERACTIVE CATALOG SEARCH -->
-    <section class="py-5" id="catalog" style="background: #FFFFFF;">
+    <section class="py-5 bg-white" id="catalog">
         <div class="container py-4">
             <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center gap-3 mb-4">
                 <div>
@@ -195,7 +195,7 @@
     </section>
 
     <!-- CORE FEATURES -->
-    <section class="py-5" id="features" style="background: #FFFFFF; border-top: 2px solid #000000; border-bottom: 2px solid #000000;">
+    <section class="py-5 section-border-both" id="features">
         <div class="container py-4">
             <div class="text-center mb-5">
                 <span class="badge border border-dark px-3 py-1 mb-2">Academic PBL Architecture</span>
@@ -251,7 +251,7 @@
     </section>
 
     <!-- TEAM DETAILS (AMAN & JASHWANTH ONLY) -->
-    <section class="py-5" id="team" style="background: #FFFFFF;">
+    <section class="py-5 bg-white" id="team">
         <div class="container py-4">
             <div class="text-center mb-5">
                 <span class="badge border border-dark px-3 py-1 mb-2">B.Tech Project-Based Learning</span>
@@ -263,7 +263,7 @@
                 <!-- Member 1: Md. Amanuddin -->
                 <div class="col-md-5">
                     <div class="glass-card p-4 text-center h-100 border border-2 border-dark">
-                        <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3 text-white fw-bold fs-3 border border-dark" style="width: 76px; height: 76px; background: #000000;">
+                        <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3 text-white fw-bold fs-3 border border-dark team-avatar-circle">
                             MA
                         </div>
                         <h4 class="fw-bold mb-1">Md. Amanuddin</h4>
@@ -275,7 +275,7 @@
                 <!-- Member 2: Jashwanth Chowdary -->
                 <div class="col-md-5">
                     <div class="glass-card p-4 text-center h-100 border border-2 border-dark">
-                        <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3 text-white fw-bold fs-3 border border-dark" style="width: 76px; height: 76px; background: #000000;">
+                        <div class="rounded-circle d-inline-flex align-items-center justify-content-center mb-3 text-white fw-bold fs-3 border border-dark team-avatar-circle">
                             JC
                         </div>
                         <h4 class="fw-bold mb-1">Jashwanth Chowdary</h4>
@@ -304,7 +304,7 @@
     </section>
 
     <!-- FOOTER -->
-    <footer class="py-4" style="background: #FFFFFF; border-top: 2px solid #000000;">
+    <footer class="py-4">
         <div class="container text-center small">
             <p class="mb-1 fw-bold">Digital Library Management System (DLMS) • B.Tech PBL Project</p>
             <p class="mb-0 text-muted">Project Developers: Md. Amanuddin & Jashwanth Chowdary • Deployed on GitHub Pages</p>
@@ -332,10 +332,10 @@
                 heroTxEl.innerHTML = txs.map(t => `
                     <div class="p-2 border border-dark rounded-2 d-flex align-items-center justify-content-between">
                         <div class="d-flex align-items-center gap-2 text-truncate me-2">
-                            <span class="badge border border-dark" style="font-size: 10px;">${t.status}</span>
+                            <span class="badge border border-dark fs-10">${t.status}</span>
                             <span class="small text-truncate fw-semibold">${t.bookTitle}</span>
                         </div>
-                        <span class="font-monospace small" style="font-size: 11px;">Due: ${t.dueDate}</span>
+                        <span class="font-monospace small fs-11">Due: ${t.dueDate}</span>
                     </div>
                 `).join('');
             }
@@ -401,7 +401,7 @@
                             </span>
                         </div>
                         <div class="p-3 d-flex flex-column flex-grow-1">
-                            <span class="badge border border-dark mb-2 align-self-start" style="font-size: 10px;">${b.category}</span>
+                            <span class="badge border border-dark mb-2 align-self-start fs-10">${b.category}</span>
                             <h6 class="fw-bold text-truncate mb-1" title="${b.title}">${b.title}</h6>
                             <p class="text-muted small text-truncate mb-2">${b.author}</p>
                             <div class="mt-auto pt-2 border-top border-dark d-flex justify-content-between align-items-center">

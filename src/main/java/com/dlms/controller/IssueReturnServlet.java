@@ -66,10 +66,14 @@ public class IssueReturnServlet extends HttpServlet {
             }
         } catch (Exception e) {
             req.setAttribute("errorMessage", e.getMessage());
-            if ("/admin/issue".equals(path)) {
-                showIssuePage(req, resp);
-            } else {
-                showReturnPage(req, resp);
+            try {
+                if ("/admin/issue".equals(path)) {
+                    showIssuePage(req, resp);
+                } else {
+                    showReturnPage(req, resp);
+                }
+            } catch (DatabaseOperationException de) {
+                throw new ServletException(de);
             }
         }
     }

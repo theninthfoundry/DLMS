@@ -10,18 +10,18 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
 </head>
-<body style="background-color: #FFFFFF !important; color: #000000 !important;">
+<body>
 
     <div class="dashboard-wrapper">
         <!-- STUDENT SIDEBAR -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="rounded-2 p-2 d-flex align-items-center justify-content-center text-white" style="background: #000000; width: 38px; height: 38px;">
+                <div class="rounded-2 p-2 brand-icon-38 text-white">
                     <i class="bi bi-mortarboard text-white fs-5"></i>
                 </div>
                 <div>
                     <div class="fw-bold fs-6">DLMS.EDU</div>
-                    <small class="text-muted" style="font-size: 11px;">Patron Portal</small>
+                    <small class="text-muted fs-11">Patron Portal</small>
                 </div>
             </div>
 
@@ -38,7 +38,7 @@
 
             <div class="sidebar-footer">
                 <div class="d-flex align-items-center justify-content-between small">
-                    <span style="font-size: 11px;">Team: Aman & Jashwanth</span>
+                    <span class="fs-11">Team: Aman & Jashwanth</span>
                     <a href="../login.html" class="small fw-semibold text-dark btn-logout">Logout</a>
                 </div>
             </div>
@@ -48,7 +48,7 @@
         <main class="main-content">
             <header class="top-navbar">
                 <div class="d-flex align-items-center gap-3">
-                    <button class="btn btn-outline-custom d-lg-none" id="sidebarToggleBtn"><i class="bi bi-list"></i></button>
+                    <button class="btn btn-outline-custom d-lg-none" id="sidebarToggleBtn" title="Toggle navigation sidebar" aria-label="Toggle navigation sidebar"><i class="bi bi-list"></i></button>
                     <div>
                         <h4 class="fw-bold mb-0">Welcome, <span id="studentGreetingName">Aman</span>!</h4>
                         <small class="text-muted"><span id="studentMemberIdBadge">MEM-2024-001</span> • <span id="studentDeptBadge">Computer Science</span></small>
@@ -215,13 +215,13 @@
             grid.innerHTML = books.map(b => `
                 <div class="col-sm-6 col-xl-3">
                     <div class="glass-card p-3 h-100 d-flex flex-column border border-dark">
-                        <img src="${b.coverUrl}" alt="${b.title}" class="rounded-2 mb-2 book-thumb w-100" style="height: 140px; object-fit: cover;" onerror="this.src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&q=80'">
-                        <span class="badge border border-dark mb-1 align-self-start" style="font-size: 10px;">${b.category}</span>
+                        <img src="${b.coverUrl}" alt="${b.title}" class="rounded-2 mb-2 book-thumb book-thumb-140 w-100" onerror="this.src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&q=80'">
+                        <span class="badge border border-dark mb-1 align-self-start fs-10">${b.category}</span>
                         <div class="fw-bold text-truncate small mb-1" title="${b.title}">${b.title}</div>
                         <small class="text-muted text-truncate mb-2">${b.author}</small>
                         <div class="mt-auto d-flex justify-content-between align-items-center">
                             <span class="small fw-semibold">${b.availableCopies} Copies</span>
-                            <a href="browse-books.html" class="btn btn-sm btn-outline-custom py-0 px-2" style="font-size: 12px;">Reserve</a>
+                            <a href="browse-books.html" class="btn btn-sm btn-outline-custom py-0 px-2 fs-12">Reserve</a>
                         </div>
                     </div>
                 </div>

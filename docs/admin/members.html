@@ -16,12 +16,12 @@
         <!-- SIDEBAR -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="rounded-3 p-2 d-flex align-items-center justify-content-center" style="background: var(--dlms-gradient-primary); width: 40px; height: 40px;">
+                <div class="rounded-2 p-2 brand-icon-38 text-white">
                     <i class="bi bi-book-half text-white fs-5"></i>
                 </div>
                 <div>
-                    <div class="fw-bold text-white fs-6">DLMS<span style="color: #06B6D4;">.EDU</span></div>
-                    <small class="text-white-50" style="font-size: 11px;">Admin Console</small>
+                    <div class="fw-bold fs-6">DLMS.EDU</div>
+                    <small class="text-muted fs-11">Admin Console</small>
                 </div>
             </div>
 
@@ -34,17 +34,17 @@
                 <li class="sidebar-item"><a href="fines.html" class="sidebar-link"><i class="bi bi-cash-stack"></i><span>Fines & Penalties</span></a></li>
                 <li class="sidebar-item"><a href="reservations.html" class="sidebar-link"><i class="bi bi-hourglass-split"></i><span>Waitlist Queue</span></a></li>
                 <li class="sidebar-item"><a href="reports.html" class="sidebar-link"><i class="bi bi-bar-chart-line"></i><span>Reports & Export</span></a></li>
-                <li class="my-3 border-top border-white-10"></li>
-                <li class="sidebar-item"><a href="../student/dashboard.html" class="sidebar-link text-cyan" style="color: #38BDF8;"><i class="bi bi-mortarboard"></i><span>Student View</span></a></li>
+                <li class="my-3 border-top border-dark"></li>
+                <li class="sidebar-item"><a href="../student/dashboard.html" class="sidebar-link"><i class="bi bi-mortarboard"></i><span>Student View</span></a></li>
             </ul>
 
             <div class="sidebar-footer">
-                <button class="btn btn-sm btn-outline-secondary w-100 mb-2 py-1 text-white-50" onclick="if(confirm('Reset demo data to original seed?')){ db.reset(); location.reload(); }">
+                <button class="btn btn-sm btn-outline-custom w-100 mb-2 py-1" onclick="if(confirm('Reset demo data to original seed?')){ db.reset(); location.reload(); }">
                     <i class="bi bi-arrow-counterclockwise me-1"></i> Reset Data
                 </button>
-                <div class="d-flex align-items-center justify-content-between text-white-50 small">
-                    <span style="font-size: 11px;">Team: Aman & Jashwanth</span>
-                    <a href="../login.html" class="text-danger small text-decoration-none btn-logout"><i class="bi bi-box-arrow-right me-1"></i>Logout</a>
+                <div class="d-flex align-items-center justify-content-between small">
+                    <span class="fs-11">Team: Aman & Jashwanth</span>
+                    <a href="../login.html" class="small fw-semibold text-dark btn-logout">Logout</a>
                 </div>
             </div>
         </aside>
@@ -53,7 +53,7 @@
         <main class="main-content">
             <header class="top-navbar">
                 <div class="d-flex align-items-center gap-3">
-                    <button class="btn btn-outline-secondary d-lg-none" id="sidebarToggleBtn"><i class="bi bi-list"></i></button>
+                    <button class="btn btn-outline-custom d-lg-none" id="sidebarToggleBtn" title="Toggle navigation sidebar" aria-label="Toggle navigation sidebar"><i class="bi bi-list"></i></button>
                     <div>
                         <h4 class="fw-bold mb-0">Patron Directory</h4>
                         <small class="text-muted">Manage student & faculty library memberships and borrow allowances</small>
@@ -61,10 +61,10 @@
                 </div>
 
                 <div class="d-flex align-items-center gap-2">
-                    <button class="btn btn-gradient-primary btn-sm" data-bs-toggle="modal" data-bs-target="#memberModal" onclick="prepareAddMember()">
+                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#memberModal" onclick="prepareAddMember()">
                         <i class="bi bi-person-plus me-1"></i> Register Member
                     </button>
-                    <button class="btn btn-outline-secondary rounded-circle p-2 d-flex align-items-center justify-content-center" id="themeToggleBtn" style="width: 38px; height: 38px;">
+                    <button class="btn btn-outline-custom rounded-circle p-2 d-flex align-items-center justify-content-center btn-circle-38" id="themeToggleBtn" title="Toggle theme" aria-label="Toggle theme">
                         <i class="bi bi-moon-stars-fill text-dark" id="themeToggleIcon"></i>
                     </button>
                 </div>
@@ -80,14 +80,14 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                        <select class="form-select" id="memberTypeFilter">
+                        <select class="form-select" id="memberTypeFilter" title="Filter by patron type" aria-label="Filter by patron type">
                             <option value="ALL">All Patron Types</option>
                             <option value="STUDENT">Students Only</option>
                             <option value="FACULTY">Faculty Only</option>
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select class="form-select" id="memberStatusFilter">
+                        <select class="form-select" id="memberStatusFilter" title="Filter by status" aria-label="Filter by status">
                             <option value="ALL">All Statuses</option>
                             <option value="ACTIVE">Active Only</option>
                             <option value="SUSPENDED">Suspended Only</option>
@@ -126,7 +126,7 @@
             <div class="modal-content glass-card border-0">
                 <div class="modal-header border-bottom">
                     <h5 class="modal-title fw-bold" id="memberModalTitle">Register Library Patron</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" title="Close" aria-label="Close"></button>
                 </div>
                 <form id="memberForm">
                     <input type="hidden" id="editMemberId">
@@ -150,7 +150,7 @@
                         <div class="row g-3">
                             <div class="col-6">
                                 <label class="form-label small fw-semibold">Membership Type *</label>
-                                <select class="form-select" id="modalMemberType" required>
+                                <select class="form-select" id="modalMemberType" title="Select membership type" aria-label="Membership Type" required>
                                     <option value="STUDENT">Student (Quota: 4)</option>
                                     <option value="FACULTY">Faculty (Quota: 8)</option>
                                 </select>
@@ -163,7 +163,7 @@
                     </div>
                     <div class="modal-footer border-top">
                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-gradient-primary">Save Patron</button>
+                        <button type="submit" class="btn btn-primary">Save Patron</button>
                     </div>
                 </form>
             </div>

@@ -1,6 +1,5 @@
 package com.dlms.controller;
 
-import com.dlms.dao.BookDAO;
 import com.dlms.dao.TransactionDAO;
 import com.dlms.exception.DatabaseOperationException;
 import com.dlms.model.Transaction;
@@ -13,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
@@ -25,7 +23,6 @@ import java.util.Stack;
 public class AdminDashboardServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final TransactionDAO transactionDAO = new TransactionDAO();
-    private final BookDAO bookDAO = new BookDAO();
     private final Gson gson = new Gson();
 
     @Override

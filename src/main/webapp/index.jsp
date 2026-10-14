@@ -48,7 +48,7 @@
                 </div>
                 <h1 class="display-3 fw-extrabold text-white mb-3" style="line-height: 1.15; letter-spacing: -0.03em;">
                     Your Library.<br>
-                    <span style="background: linear-gradient(135deg, #60A5FA 0%, #22D3EE 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                    <span style="background: linear-gradient(135deg, #60A5FA 0%, #22D3EE 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">
                         Smarter. Faster. Digital.
                     </span>
                 </h1>

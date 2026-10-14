@@ -16,12 +16,12 @@
         <!-- SIDEBAR -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="rounded-3 p-2 d-flex align-items-center justify-content-center" style="background: var(--dlms-gradient-primary); width: 40px; height: 40px;">
+                <div class="rounded-2 p-2 brand-icon-38 text-white">
                     <i class="bi bi-book-half text-white fs-5"></i>
                 </div>
                 <div>
-                    <div class="fw-bold text-white fs-6">DLMS<span style="color: #06B6D4;">.EDU</span></div>
-                    <small class="text-white-50" style="font-size: 11px;">Admin Console</small>
+                    <div class="fw-bold fs-6">DLMS.EDU</div>
+                    <small class="text-muted fs-11">Admin Console</small>
                 </div>
             </div>
 
@@ -34,17 +34,17 @@
                 <li class="sidebar-item"><a href="fines.html" class="sidebar-link"><i class="bi bi-cash-stack"></i><span>Fines & Penalties</span></a></li>
                 <li class="sidebar-item"><a href="reservations.html" class="sidebar-link"><i class="bi bi-hourglass-split"></i><span>Waitlist Queue</span></a></li>
                 <li class="sidebar-item"><a href="reports.html" class="sidebar-link"><i class="bi bi-bar-chart-line"></i><span>Reports & Export</span></a></li>
-                <li class="my-3 border-top border-white-10"></li>
-                <li class="sidebar-item"><a href="../student/dashboard.html" class="sidebar-link text-cyan" style="color: #38BDF8;"><i class="bi bi-mortarboard"></i><span>Student View</span></a></li>
+                <li class="my-3 border-top border-dark"></li>
+                <li class="sidebar-item"><a href="../student/dashboard.html" class="sidebar-link"><i class="bi bi-mortarboard"></i><span>Student View</span></a></li>
             </ul>
 
             <div class="sidebar-footer">
-                <button class="btn btn-sm btn-outline-secondary w-100 mb-2 py-1 text-white-50" onclick="if(confirm('Reset demo data to original seed?')){ db.reset(); location.reload(); }">
+                <button class="btn btn-sm btn-outline-custom w-100 mb-2 py-1" onclick="if(confirm('Reset demo data to original seed?')){ db.reset(); location.reload(); }">
                     <i class="bi bi-arrow-counterclockwise me-1"></i> Reset Data
                 </button>
-                <div class="d-flex align-items-center justify-content-between text-white-50 small">
-                    <span style="font-size: 11px;">Team: Aman & Jashwanth</span>
-                    <a href="../login.html" class="text-danger small text-decoration-none btn-logout"><i class="bi bi-box-arrow-right me-1"></i>Logout</a>
+                <div class="d-flex align-items-center justify-content-between small">
+                    <span class="fs-11">Team: Aman & Jashwanth</span>
+                    <a href="../login.html" class="small fw-semibold text-dark btn-logout">Logout</a>
                 </div>
             </div>
         </aside>
@@ -53,7 +53,7 @@
         <main class="main-content">
             <header class="top-navbar">
                 <div class="d-flex align-items-center gap-3">
-                    <button class="btn btn-outline-secondary d-lg-none" id="sidebarToggleBtn"><i class="bi bi-list"></i></button>
+                    <button class="btn btn-outline-custom d-lg-none" id="sidebarToggleBtn" title="Toggle navigation sidebar" aria-label="Toggle navigation sidebar"><i class="bi bi-list"></i></button>
                     <div>
                         <h4 class="fw-bold mb-0">Process Book Return</h4>
                         <small class="text-muted">Restore book inventory, calculate overdue fines, and trigger waitlist notifications</small>
@@ -61,7 +61,7 @@
                 </div>
 
                 <div class="d-flex align-items-center gap-2">
-                    <button class="btn btn-outline-secondary rounded-circle p-2 d-flex align-items-center justify-content-center" id="themeToggleBtn" style="width: 38px; height: 38px;">
+                    <button class="btn btn-outline-custom rounded-circle p-2 d-flex align-items-center justify-content-center btn-circle-38" id="themeToggleBtn" title="Toggle theme" aria-label="Toggle theme">
                         <i class="bi bi-moon-stars-fill text-dark" id="themeToggleIcon"></i>
                     </button>
                 </div>
@@ -71,7 +71,7 @@
                 <div class="col-lg-9">
                     <div class="glass-card p-4 p-md-5">
                         <div class="d-flex align-items-center gap-3 mb-4 pb-3 border-bottom">
-                            <div class="stat-icon-wrapper" style="background: rgba(16, 185, 129, 0.1); color: var(--dlms-success);">
+                            <div class="stat-icon-wrapper">
                                 <i class="bi bi-arrow-down-left-circle"></i>
                             </div>
                             <div>
@@ -93,13 +93,13 @@
                             <!-- Select Transaction -->
                             <div class="mb-4">
                                 <label class="form-label fw-semibold small text-uppercase">Select Active Loan Record *</label>
-                                <select class="form-select" id="transactionSelect" required>
+                                <select class="form-select" id="transactionSelect" title="Select active loan record" aria-label="Select active loan record" required>
                                     <option value="" disabled selected>Choose active borrowed book...</option>
                                 </select>
                             </div>
 
                             <!-- Transaction Overview Panel -->
-                            <div id="loanPreviewPanel" class="p-3 rounded-3 mb-4 d-none" style="background: rgba(37, 99, 235, 0.05); border: 1px solid rgba(37, 99, 235, 0.15);">
+                            <div id="loanPreviewPanel" class="p-3 rounded-3 mb-4 d-none border border-dark bg-white">
                                 <div class="row g-3">
                                     <div class="col-sm-6">
                                         <div class="text-muted small">Book Title</div>
@@ -132,7 +132,7 @@
                                 <input type="text" id="returnRemarksInput" class="form-control" value="Returned in good condition" placeholder="Book condition or damages noted">
                             </div>
 
-                            <button type="submit" class="btn btn-gradient-primary w-100 py-3 fw-semibold">
+                            <button type="submit" class="btn btn-primary w-100 py-3 fw-semibold">
                                 <i class="bi bi-box-arrow-in-down me-2"></i> Process Return & Restock Inventory
                             </button>
                         </form>
