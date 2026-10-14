@@ -59,7 +59,7 @@
     <div class="sidebar-footer">
         <div class="p-2 rounded-3 mb-2" style="background: rgba(255, 255, 255, 0.05); font-size: 0.75rem;">
             <div class="text-white fw-bold mb-1"><i class="bi bi-code-slash text-info me-1"></i>PBL Team No: 1</div>
-            <div class="text-muted">Siddhartha • Aman • Jashwanth</div>
+            <div class="text-muted">Aman • Jashwanth</div>
         </div>
         <a href="${pageContext.request.contextPath}/logout" class="sidebar-link text-danger">
             <i class="bi bi-box-arrow-left"></i>

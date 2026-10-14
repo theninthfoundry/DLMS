@@ -1,7 +1,6 @@
 -- ====================================================================
 -- DIGITAL LIBRARY MANAGEMENT SYSTEM (DLMS) - DATABASE SCRIPT
--- B.Tech PBL Project | Team No: 1
--- Members: L.N.C Siddhartha, Md. Amanuddin, Jashwanth Chowdary
+-- Members: Md. Amanuddin, Jashwanth Chowdary
 -- Compatible with MySQL 5.7+ / MySQL 8.0+ / MariaDB
 -- ====================================================================
 
@@ -167,17 +166,16 @@ CREATE TABLE notifications (
 -- Plain text or SHA256 supported via PasswordHasher utility
 -- ====================================================================
 
--- 1. Insert Members (8+ realistic members)
+-- 1. Insert Members (8 realistic members)
 INSERT INTO members (member_id, name, email, phone, department, year, member_type, max_borrow_limit, registration_date, status) VALUES
-('MEM-2024-001', 'L.N.C Siddhartha', 'siddhartha@library.edu', '+91 98765 43210', 'Computer Science & Engineering', '3rd Year', 'STUDENT', 4, '2024-01-10', 'ACTIVE'),
-('MEM-2024-002', 'Md. Amanuddin', 'amanuddin@library.edu', '+91 98765 43211', 'Computer Science & Engineering', '3rd Year', 'STUDENT', 4, '2024-01-10', 'ACTIVE'),
-('MEM-2024-003', 'Jashwanth Chowdary', 'jashwanth@library.edu', '+91 98765 43212', 'Computer Science & Engineering', '3rd Year', 'STUDENT', 4, '2024-01-12', 'ACTIVE'),
-('MEM-2024-004', 'Dr. Rajesh Sharma', 'rajesh.sharma@library.edu', '+91 98765 11223', 'Information Technology', 'Faculty', 'FACULTY', 8, '2023-08-01', 'ACTIVE'),
-('MEM-2024-005', 'Priya Nair', 'priya.nair@library.edu', '+91 98765 22334', 'Electronics & Communication', '2nd Year', 'STUDENT', 4, '2024-02-15', 'ACTIVE'),
-('MEM-2024-006', 'Rohan Verma', 'rohan.verma@library.edu', '+91 98765 33445', 'Mechanical Engineering', '4th Year', 'STUDENT', 4, '2023-09-05', 'ACTIVE'),
-('MEM-2024-007', 'Prof. Ananya Sen', 'ananya.sen@library.edu', '+91 98765 44556', 'Computer Science & Engineering', 'Faculty', 'FACULTY', 8, '2023-07-20', 'ACTIVE'),
-('MEM-2024-008', 'Kavita Reddy', 'kavita.reddy@library.edu', '+91 98765 55667', 'Data Science & AI', '1st Year', 'STUDENT', 4, '2024-08-20', 'ACTIVE'),
-('MEM-2024-009', 'Vikram Aditya', 'vikram.aditya@library.edu', '+91 98765 66778', 'Civil Engineering', '3rd Year', 'STUDENT', 4, '2024-03-01', 'ACTIVE');
+('MEM-2024-001', 'Md. Amanuddin', 'amanuddin@library.edu', '+91 98765 43211', 'Computer Science & Engineering', '3rd Year', 'STUDENT', 4, '2024-01-10', 'ACTIVE'),
+('MEM-2024-002', 'Jashwanth Chowdary', 'jashwanth@library.edu', '+91 98765 43212', 'Computer Science & Engineering', '3rd Year', 'STUDENT', 4, '2024-01-12', 'ACTIVE'),
+('MEM-2024-003', 'Dr. Rajesh Sharma', 'rajesh.sharma@library.edu', '+91 98765 11223', 'Information Technology', 'Faculty', 'FACULTY', 8, '2023-08-01', 'ACTIVE'),
+('MEM-2024-004', 'Priya Nair', 'priya.nair@library.edu', '+91 98765 22334', 'Electronics & Communication', '2nd Year', 'STUDENT', 4, '2024-02-15', 'ACTIVE'),
+('MEM-2024-005', 'Rohan Verma', 'rohan.verma@library.edu', '+91 98765 33445', 'Mechanical Engineering', '4th Year', 'STUDENT', 4, '2023-09-05', 'ACTIVE'),
+('MEM-2024-006', 'Prof. Ananya Sen', 'ananya.sen@library.edu', '+91 98765 44556', 'Computer Science & Engineering', 'Faculty', 'FACULTY', 8, '2023-07-20', 'ACTIVE'),
+('MEM-2024-007', 'Kavita Reddy', 'kavita.reddy@library.edu', '+91 98765 55667', 'Data Science & AI', '1st Year', 'STUDENT', 4, '2024-08-20', 'ACTIVE'),
+('MEM-2024-008', 'Vikram Aditya', 'vikram.aditya@library.edu', '+91 98765 66778', 'Civil Engineering', '3rd Year', 'STUDENT', 4, '2024-03-01', 'ACTIVE');
 
 -- 2. Insert Users (Admin, Student, Faculty logins)
 -- Password for all defaults is: 'admin123' for admin, 'student123' for students, 'faculty123' for faculty
@@ -185,11 +183,10 @@ INSERT INTO members (member_id, name, email, phone, department, year, member_typ
 INSERT INTO users (username, email, password_hash, role, member_id, status) VALUES
 ('admin', 'admin@library.edu', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 'ADMIN', NULL, 'ACTIVE'),
 ('librarian', 'librarian@library.edu', '240be518fabd2724ddb6f04eeb1da5967448d7e831c08c8fa822809f74c720a9', 'LIBRARIAN', NULL, 'ACTIVE'),
-('siddhartha', 'siddhartha@library.edu', 'd550b06437d8e2d4d989fce0a7e04f9ffadba04f5e048130761e2ca4cb38eb35', 'STUDENT', 'MEM-2024-001', 'ACTIVE'),
-('aman', 'amanuddin@library.edu', 'd550b06437d8e2d4d989fce0a7e04f9ffadba04f5e048130761e2ca4cb38eb35', 'STUDENT', 'MEM-2024-002', 'ACTIVE'),
-('jashwanth', 'jashwanth@library.edu', 'd550b06437d8e2d4d989fce0a7e04f9ffadba04f5e048130761e2ca4cb38eb35', 'STUDENT', 'MEM-2024-003', 'ACTIVE'),
-('student', 'student@library.edu', 'd550b06437d8e2d4d989fce0a7e04f9ffadba04f5e048130761e2ca4cb38eb35', 'STUDENT', 'MEM-2024-005', 'ACTIVE'),
-('drrajesh', 'rajesh.sharma@library.edu', 'd550b06437d8e2d4d989fce0a7e04f9ffadba04f5e048130761e2ca4cb38eb35', 'FACULTY', 'MEM-2024-004', 'ACTIVE');
+('aman', 'amanuddin@library.edu', 'd550b06437d8e2d4d989fce0a7e04f9ffadba04f5e048130761e2ca4cb38eb35', 'STUDENT', 'MEM-2024-001', 'ACTIVE'),
+('jashwanth', 'jashwanth@library.edu', 'd550b06437d8e2d4d989fce0a7e04f9ffadba04f5e048130761e2ca4cb38eb35', 'STUDENT', 'MEM-2024-002', 'ACTIVE'),
+('student', 'student@library.edu', 'd550b06437d8e2d4d989fce0a7e04f9ffadba04f5e048130761e2ca4cb38eb35', 'STUDENT', 'MEM-2024-004', 'ACTIVE'),
+('drrajesh', 'rajesh.sharma@library.edu', 'd550b06437d8e2d4d989fce0a7e04f9ffadba04f5e048130761e2ca4cb38eb35', 'FACULTY', 'MEM-2024-003', 'ACTIVE');
 
 -- 3. Insert Books (18 comprehensive library titles with real covers & categories)
 INSERT INTO books (book_id, isbn, title, author, category, publisher, publication_year, language, description, shelf_number, quantity, available_copies, status, cover_url) VALUES
@@ -244,6 +241,6 @@ INSERT INTO reservations (reservation_id, member_id, book_id, reservation_date, 
 INSERT INTO notifications (user_id, title, message, type, is_read, created_at) VALUES
 (1, 'System Ready', 'Digital Library Management System initialized successfully.', 'SUCCESS', TRUE, '2024-08-01 09:00:00'),
 (1, 'Overdue Alert', '2 members currently have overdue book transactions.', 'WARNING', FALSE, NOW()),
-(3, 'Welcome to DLMS', 'Welcome Siddhartha! Your student library account is active.', 'INFO', TRUE, '2024-08-01 10:00:00'),
+(3, 'Welcome to DLMS', 'Welcome Aman! Your student library account is active.', 'INFO', TRUE, '2024-08-01 10:00:00'),
 (4, 'Book Issued', 'You have borrowed CLRS (BK-1001). Due date is Oct 16, 2024.', 'SUCCESS', FALSE, NOW()),
 (6, 'Overdue Notice', 'Database System Concepts (BK-1005) is overdue. Please return to avoid further fine.', 'DANGER', FALSE, NOW());

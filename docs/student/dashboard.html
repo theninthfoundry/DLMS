@@ -10,18 +10,18 @@
     <link rel="stylesheet" href="../assets/css/style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
 </head>
-<body>
+<body style="background-color: #FFFFFF !important; color: #000000 !important;">
 
     <div class="dashboard-wrapper">
         <!-- STUDENT SIDEBAR -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-header">
-                <div class="rounded-3 p-2 d-flex align-items-center justify-content-center" style="background: var(--dlms-gradient-primary); width: 40px; height: 40px;">
+                <div class="rounded-2 p-2 d-flex align-items-center justify-content-center text-white" style="background: #000000; width: 38px; height: 38px;">
                     <i class="bi bi-mortarboard text-white fs-5"></i>
                 </div>
                 <div>
-                    <div class="fw-bold text-white fs-6">DLMS<span style="color: #06B6D4;">.EDU</span></div>
-                    <small class="text-white-50" style="font-size: 11px;">Patron Portal</small>
+                    <div class="fw-bold fs-6">DLMS.EDU</div>
+                    <small class="text-muted" style="font-size: 11px;">Patron Portal</small>
                 </div>
             </div>
 
@@ -32,14 +32,14 @@
                 <li class="sidebar-item"><a href="fines.html" class="sidebar-link"><i class="bi bi-receipt"></i><span>My Fines</span></a></li>
                 <li class="sidebar-item"><a href="history.html" class="sidebar-link"><i class="bi bi-clock-history"></i><span>Loan History</span></a></li>
                 <li class="sidebar-item"><a href="profile.html" class="sidebar-link"><i class="bi bi-person"></i><span>My Profile</span></a></li>
-                <li class="my-3 border-top border-white-10"></li>
-                <li class="sidebar-item"><a href="../admin/dashboard.html" class="sidebar-link text-warning"><i class="bi bi-shield-lock"></i><span>Switch to Admin</span></a></li>
+                <li class="my-3 border-top border-dark"></li>
+                <li class="sidebar-item"><a href="../admin/dashboard.html" class="sidebar-link"><i class="bi bi-shield-lock"></i><span>Switch to Admin</span></a></li>
             </ul>
 
             <div class="sidebar-footer">
-                <div class="d-flex align-items-center justify-content-between text-white-50 small">
-                    <span style="font-size: 11px;">B.Tech PBL • Team 1</span>
-                    <a href="../login.html" class="text-danger small text-decoration-none btn-logout"><i class="bi bi-box-arrow-right me-1"></i>Logout</a>
+                <div class="d-flex align-items-center justify-content-between small">
+                    <span style="font-size: 11px;">Team: Aman & Jashwanth</span>
+                    <a href="../login.html" class="small fw-semibold text-dark btn-logout">Logout</a>
                 </div>
             </div>
         </aside>
@@ -48,30 +48,27 @@
         <main class="main-content">
             <header class="top-navbar">
                 <div class="d-flex align-items-center gap-3">
-                    <button class="btn btn-outline-secondary d-lg-none" id="sidebarToggleBtn"><i class="bi bi-list"></i></button>
+                    <button class="btn btn-outline-custom d-lg-none" id="sidebarToggleBtn"><i class="bi bi-list"></i></button>
                     <div>
-                        <h4 class="fw-bold mb-0">Welcome, <span id="studentGreetingName">Student</span>!</h4>
+                        <h4 class="fw-bold mb-0">Welcome, <span id="studentGreetingName">Aman</span>!</h4>
                         <small class="text-muted"><span id="studentMemberIdBadge">MEM-2024-001</span> • <span id="studentDeptBadge">Computer Science</span></small>
                     </div>
                 </div>
 
                 <div class="d-flex align-items-center gap-2">
-                    <a href="browse-books.html" class="btn btn-sm btn-gradient-primary">
+                    <a href="browse-books.html" class="btn btn-sm btn-primary">
                         <i class="bi bi-search me-1"></i> Reserve Book
                     </a>
-                    <button class="btn btn-outline-secondary rounded-circle p-2 d-flex align-items-center justify-content-center" id="themeToggleBtn" style="width: 38px; height: 38px;">
-                        <i class="bi bi-moon-stars-fill text-dark" id="themeToggleIcon"></i>
-                    </button>
                     <div class="dropdown">
-                        <button class="btn btn-outline-secondary dropdown-toggle d-flex align-items-center gap-2 py-1 px-2 rounded-pill" type="button" data-bs-toggle="dropdown">
-                            <div class="rounded-circle bg-info text-dark d-flex align-items-center justify-content-center fw-bold" style="width: 28px; height: 28px; font-size: 12px;">S</div>
-                            <span class="small fw-semibold session-user-name">Siddhartha</span>
+                        <button class="btn btn-outline-custom dropdown-toggle d-flex align-items-center gap-2 py-1 px-3" type="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle"></i>
+                            <span class="small fw-semibold session-user-name">Aman</span>
                         </button>
-                        <ul class="dropdown-menu dropdown-menu-end shadow">
+                        <ul class="dropdown-menu dropdown-menu-end border border-dark">
                             <li><a class="dropdown-item small" href="profile.html"><i class="bi bi-person me-2"></i>My Profile</a></li>
                             <li><a class="dropdown-item small" href="../admin/dashboard.html"><i class="bi bi-shield-lock me-2"></i>Admin Console</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item small text-danger btn-logout" href="../login.html"><i class="bi bi-box-arrow-right me-2"></i>Sign Out</a></li>
+                            <li><hr class="dropdown-divider border-dark"></li>
+                            <li><a class="dropdown-item small btn-logout" href="../login.html"><i class="bi bi-box-arrow-right me-2"></i>Sign Out</a></li>
                         </ul>
                     </div>
                 </div>
@@ -81,29 +78,29 @@
             <div class="row g-3 mb-4">
                 <div class="col-sm-6 col-md-3">
                     <div class="stat-card">
-                        <div class="text-muted small fw-semibold text-uppercase">Active Borrowed</div>
-                        <div class="stat-val text-primary" id="studentActiveLoansCount">0</div>
+                        <div class="text-muted small fw-bold text-uppercase">Active Borrowed</div>
+                        <div class="stat-val" id="studentActiveLoansCount">0</div>
                         <div class="small text-muted">Limit: <span id="studentMaxLimit">4</span> Books</div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-3">
                     <div class="stat-card">
-                        <div class="text-muted small fw-semibold text-uppercase">Overdue Books</div>
-                        <div class="stat-val text-danger" id="studentOverdueCount">0</div>
+                        <div class="text-muted small fw-bold text-uppercase">Overdue Books</div>
+                        <div class="stat-val" id="studentOverdueCount">0</div>
                         <div class="small text-muted" id="studentOverdueLabel">None overdue</div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-3">
                     <div class="stat-card">
-                        <div class="text-muted small fw-semibold text-uppercase">Outstanding Fines</div>
-                        <div class="stat-val text-warning">₹<span id="studentUnpaidFines">0.00</span></div>
-                        <div class="small text-muted">Clear at counter or UPI</div>
+                        <div class="text-muted small fw-bold text-uppercase">Outstanding Fines</div>
+                        <div class="stat-val">₹<span id="studentUnpaidFines">0.00</span></div>
+                        <div class="small text-muted">Awaiting settlement</div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-3">
                     <div class="stat-card">
-                        <div class="text-muted small fw-semibold text-uppercase">Waitlist Reserves</div>
-                        <div class="stat-val text-info" id="studentReservationsCount">0</div>
+                        <div class="text-muted small fw-bold text-uppercase">Waitlist Reserves</div>
+                        <div class="stat-val" id="studentReservationsCount">0</div>
                         <div class="small text-muted">Active queue ranks</div>
                     </div>
                 </div>
@@ -113,7 +110,7 @@
             <div class="glass-card p-4 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="fw-bold mb-0">Currently Borrowed Volumes</h5>
-                    <a href="my-books.html" class="text-decoration-none small">View Detailed &rarr;</a>
+                    <a href="my-books.html" class="small fw-semibold text-dark">View Detailed &rarr;</a>
                 </div>
 
                 <div class="table-responsive">
@@ -134,11 +131,11 @@
                 </div>
             </div>
 
-            <!-- Quick Catalog Recommendations -->
+            <!-- Quick Recommendations -->
             <div class="glass-card p-4">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="fw-bold mb-0">Available in Catalog</h5>
-                    <a href="browse-books.html" class="text-decoration-none small">Explore All Titles &rarr;</a>
+                    <a href="browse-books.html" class="small fw-semibold text-dark">Explore All Titles &rarr;</a>
                 </div>
                 <div class="row g-3" id="studentRecommendedGrid">
                     <!-- Populated via JS -->
@@ -171,7 +168,7 @@
             document.getElementById('studentOverdueCount').textContent = overdue.length;
             if (overdue.length > 0) {
                 document.getElementById('studentOverdueLabel').textContent = 'Immediate return needed!';
-                document.getElementById('studentOverdueLabel').className = 'small text-danger fw-bold';
+                document.getElementById('studentOverdueLabel').className = 'small fw-bold text-decoration-underline';
             }
 
             // Fines
@@ -200,12 +197,12 @@
                             <td><strong>${t.dueDate}</strong></td>
                             <td>
                                 ${t.isOverdue ? 
-                                    `<span class="badge badge-soft-danger">${t.daysOverdue} Days Overdue</span>` : 
-                                    `<span class="badge badge-soft-info">${daysRemaining} Days Left</span>`
+                                    `<span class="badge border border-dark">${t.daysOverdue} Days Overdue</span>` : 
+                                    `<span class="badge border border-dark">${daysRemaining} Days Left</span>`
                                 }
                             </td>
                             <td>
-                                <span class="badge ${t.isOverdue ? 'badge-soft-danger' : 'badge-soft-success'}">${t.status}</span>
+                                <span class="badge border border-dark">${t.status}</span>
                             </td>
                         </tr>
                     `;
@@ -217,14 +214,14 @@
             const grid = document.getElementById('studentRecommendedGrid');
             grid.innerHTML = books.map(b => `
                 <div class="col-sm-6 col-xl-3">
-                    <div class="glass-card p-3 h-100 d-flex flex-column card-hover-lift">
-                        <img src="${b.coverUrl}" alt="${b.title}" class="rounded-2 mb-2" style="height: 140px; width: 100%; object-fit: cover;" onerror="this.src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&q=80'">
-                        <span class="badge badge-soft-info mb-1 align-self-start" style="font-size: 10px;">${b.category}</span>
+                    <div class="glass-card p-3 h-100 d-flex flex-column border border-dark">
+                        <img src="${b.coverUrl}" alt="${b.title}" class="rounded-2 mb-2 book-thumb w-100" style="height: 140px; object-fit: cover;" onerror="this.src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&q=80'">
+                        <span class="badge border border-dark mb-1 align-self-start" style="font-size: 10px;">${b.category}</span>
                         <div class="fw-bold text-truncate small mb-1" title="${b.title}">${b.title}</div>
                         <small class="text-muted text-truncate mb-2">${b.author}</small>
                         <div class="mt-auto d-flex justify-content-between align-items-center">
-                            <span class="text-success small fw-semibold">${b.availableCopies} Copies</span>
-                            <a href="browse-books.html" class="btn btn-sm btn-outline-primary py-0 px-2 rounded-pill" style="font-size: 12px;">Reserve</a>
+                            <span class="small fw-semibold">${b.availableCopies} Copies</span>
+                            <a href="browse-books.html" class="btn btn-sm btn-outline-custom py-0 px-2" style="font-size: 12px;">Reserve</a>
                         </div>
                     </div>
                 </div>

@@ -66,7 +66,7 @@ https://<YOUR_USERNAME>.github.io/<YOUR_REPOSITORY_NAME>/
 | Portal | Username | Password | Role & Permissions |
 | :--- | :--- | :--- | :--- |
 | **Admin Console** | `admin` | `admin123` | Full administrative control, issue/return books, catalog management, fine collection, and CSV audit exports |
-| **Student Portal** | `siddhartha` | `student123` | Patron borrowing dashboard, due date countdowns, catalog search, and FIFO waitlist reservations |
+| **Student Portal** | `aman` | `student123` | Patron borrowing dashboard, due date countdowns, catalog search, and FIFO waitlist reservations |
 
 *(Tip: Both login pages include 1-click **"Admin Demo"** and **"Student Demo"** buttons for instant testing during viva presentations).*
 

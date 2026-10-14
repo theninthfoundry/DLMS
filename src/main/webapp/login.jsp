@@ -47,7 +47,7 @@
                             <label class="form-label text-white-50 small fw-semibold">Username or Email</label>
                             <div class="input-group">
                                 <span class="input-group-text bg-dark border-secondary text-white-50"><i class="bi bi-person"></i></span>
-                                <input type="text" name="username" id="usernameInput" class="form-control bg-dark text-white border-secondary" placeholder="e.g. admin or siddhartha" value="${prevUsername != null ? prevUsername : (param.role == 'ADMIN' ? 'admin' : (param.role == 'STUDENT' ? 'siddhartha' : ''))}" required>
+                                <input type="text" name="username" id="usernameInput" class="form-control bg-dark text-white border-secondary" placeholder="e.g. admin or aman" value="${prevUsername != null ? prevUsername : (param.role == 'ADMIN' ? 'admin' : (param.role == 'STUDENT' ? 'aman' : ''))}" required>
                             </div>
                         </div>
 
@@ -88,7 +88,7 @@
                                 </button>
                             </div>
                             <div class="col-6">
-                                <button type="button" class="btn btn-sm btn-outline-light w-100 py-1" onclick="fillDemoCredentials('siddhartha', 'student123')">
+                                <button type="button" class="btn btn-sm btn-outline-light w-100 py-1" onclick="fillDemoCredentials('aman', 'student123')">
                                     <i class="bi bi-mortarboard me-1 text-info"></i> Student Demo
                                 </button>
                             </div>
@@ -97,7 +97,7 @@
                 </div>
 
                 <div class="text-center mt-3 text-white-50 small">
-                    B.Tech PBL Project • Team No: 1 (Siddhartha, Amanuddin, Jashwanth)
+                    B.Tech PBL Project • Team: Md. Amanuddin & Jashwanth Chowdary
                 </div>
             </div>
         </div>

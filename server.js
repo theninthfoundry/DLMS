@@ -1,6 +1,6 @@
 /**
  * DIGITAL LIBRARY MANAGEMENT SYSTEM (DLMS) - FULL-STACK APPLICATION SERVER
- * B.Tech PBL Project | Team No: 1 (Siddhartha, Amanuddin, Jashwanth)
+ * B.Tech PBL Project | Team: Md. Amanuddin & Jashwanth Chowdary
  * Runs standalone on port 8080 with zero external npm dependencies.
  * Implements complete backend business logic, session auth, database state,
  * and serves the modern academic frontend with Chart.js analytics.
@@ -23,16 +23,14 @@ const db = {
     users: [
         { id: 1, username: 'admin', email: 'admin@library.edu', password: 'admin123', role: 'ADMIN', memberId: null, status: 'ACTIVE' },
         { id: 2, username: 'librarian', email: 'librarian@library.edu', password: 'admin123', role: 'LIBRARIAN', memberId: null, status: 'ACTIVE' },
-        { id: 3, username: 'siddhartha', email: 'siddhartha@library.edu', password: 'student123', role: 'STUDENT', memberId: 'MEM-2024-001', status: 'ACTIVE' },
-        { id: 4, username: 'aman', email: 'amanuddin@library.edu', password: 'student123', role: 'STUDENT', memberId: 'MEM-2024-002', status: 'ACTIVE' },
-        { id: 5, username: 'jashwanth', email: 'jashwanth@library.edu', password: 'student123', role: 'STUDENT', memberId: 'MEM-2024-003', status: 'ACTIVE' },
-        { id: 6, username: 'student', email: 'student@library.edu', password: 'student123', role: 'STUDENT', memberId: 'MEM-2024-005', status: 'ACTIVE' },
-        { id: 7, username: 'drrajesh', email: 'rajesh.sharma@library.edu', password: 'student123', role: 'FACULTY', memberId: 'MEM-2024-004', status: 'ACTIVE' }
+        { id: 3, username: 'aman', email: 'amanuddin@library.edu', password: 'student123', role: 'STUDENT', memberId: 'MEM-2024-001', status: 'ACTIVE' },
+        { id: 4, username: 'jashwanth', email: 'jashwanth@library.edu', password: 'student123', role: 'STUDENT', memberId: 'MEM-2024-002', status: 'ACTIVE' },
+        { id: 5, username: 'student', email: 'student@library.edu', password: 'student123', role: 'STUDENT', memberId: 'MEM-2024-003', status: 'ACTIVE' },
+        { id: 6, username: 'drrajesh', email: 'rajesh.sharma@library.edu', password: 'student123', role: 'FACULTY', memberId: 'MEM-2024-004', status: 'ACTIVE' }
     ],
     members: [
-        { id: 1, memberId: 'MEM-2024-001', name: 'L.N.C Siddhartha', email: 'siddhartha@library.edu', phone: '+91 98765 43210', department: 'Computer Science & Engineering', year: '3rd Year', memberType: 'STUDENT', maxBorrowLimit: 4, registrationDate: '2024-01-10', status: 'ACTIVE' },
-        { id: 2, memberId: 'MEM-2024-002', name: 'Md. Amanuddin', email: 'amanuddin@library.edu', phone: '+91 98765 43211', department: 'Computer Science & Engineering', year: '3rd Year', memberType: 'STUDENT', maxBorrowLimit: 4, registrationDate: '2024-01-10', status: 'ACTIVE' },
-        { id: 3, memberId: 'MEM-2024-003', name: 'Jashwanth Chowdary', email: 'jashwanth@library.edu', phone: '+91 98765 43212', department: 'Computer Science & Engineering', year: '3rd Year', memberType: 'STUDENT', maxBorrowLimit: 4, registrationDate: '2024-01-12', status: 'ACTIVE' },
+        { id: 1, memberId: 'MEM-2024-001', name: 'Md. Amanuddin', email: 'amanuddin@library.edu', phone: '+91 98765 43211', department: 'Computer Science & Engineering', year: '3rd Year', memberType: 'STUDENT', maxBorrowLimit: 4, registrationDate: '2024-01-10', status: 'ACTIVE' },
+        { id: 2, memberId: 'MEM-2024-002', name: 'Jashwanth Chowdary', email: 'jashwanth@library.edu', phone: '+91 98765 43212', department: 'Computer Science & Engineering', year: '3rd Year', memberType: 'STUDENT', maxBorrowLimit: 4, registrationDate: '2024-01-12', status: 'ACTIVE' },
         { id: 4, memberId: 'MEM-2024-004', name: 'Dr. Rajesh Sharma', email: 'rajesh.sharma@library.edu', phone: '+91 98765 11223', department: 'Information Technology', year: 'Associate Professor', memberType: 'FACULTY', maxBorrowLimit: 8, registrationDate: '2023-08-01', status: 'ACTIVE' },
         { id: 5, memberId: 'MEM-2024-005', name: 'Priya Nair', email: 'priya.nair@library.edu', phone: '+91 98765 22334', department: 'Electronics & Communication', year: '2nd Year', memberType: 'STUDENT', maxBorrowLimit: 4, registrationDate: '2024-02-15', status: 'ACTIVE' },
         { id: 6, memberId: 'MEM-2024-006', name: 'Rohan Verma', email: 'rohan.verma@library.edu', phone: '+91 98765 33445', department: 'Mechanical Engineering', year: '4th Year', memberType: 'STUDENT', maxBorrowLimit: 4, registrationDate: '2023-09-05', status: 'ACTIVE' },
@@ -1042,7 +1040,7 @@ const server = http.createServer((req, res) => {
 
     // 15. Student Portal
     if (pathname === '/student/dashboard') {
-        const studentUser = currentUser || db.users[2]; // Default to Siddhartha
+        const studentUser = currentUser || db.users[2]; // Default to Aman
         const rawMember = db.members.find(m => m.memberId === studentUser.memberId) || db.members[0];
         const member = {
             ...rawMember,
@@ -1341,7 +1339,7 @@ server.listen(PORT, () => {
     console.log(`====================================================================`);
     console.log(`  DIGITAL LIBRARY MANAGEMENT SYSTEM (DLMS) - SERVER RUNNING`);
     console.log(`  B.Tech PBL Project | Team No: 1`);
-    console.log(`  Members: L.N.C Siddhartha, Md. Amanuddin, Jashwanth Chowdary`);
+    console.log(`  Members: Md. Amanuddin, Jashwanth Chowdary`);
     console.log(`  URL: http://localhost:${PORT}`);
     console.log(`====================================================================`);
 });

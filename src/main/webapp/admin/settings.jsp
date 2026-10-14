@@ -69,7 +69,7 @@
                     <div class="p-3 rounded-3 bg-light mb-3">
                         <small class="text-muted d-block">PBL Team Submission</small>
                         <strong class="text-dark">Team No: 1</strong>
-                        <div class="small text-muted">L.N.C Siddhartha, Md. Amanuddin, Jashwanth Chowdary</div>
+                        <div class="small text-muted">Md. Amanuddin, Jashwanth Chowdary</div>
                     </div>
                 </div>
             </div>

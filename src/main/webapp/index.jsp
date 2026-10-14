@@ -345,34 +345,24 @@
         </div>
 
         <div class="row g-4 justify-content-center">
-            <div class="col-md-4">
-                <div class="glass-card p-4 text-center h-100 card-hover-lift">
-                    <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center mx-auto mb-3 fw-bold fs-3 shadow" style="width: 72px; height: 72px;">
-                        LS
-                    </div>
-                    <h5 class="fw-bold mb-1">L.N.C Siddhartha</h5>
-                    <p class="text-primary small fw-semibold mb-2">Team Member 1</p>
-                    <p class="text-muted small">Architecture & Database Schema Design, Issue/Return Service Engine.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <div class="glass-card p-4 text-center h-100 card-hover-lift">
                     <div class="rounded-circle bg-info text-white d-flex align-items-center justify-content-center mx-auto mb-3 fw-bold fs-3 shadow" style="width: 72px; height: 72px;">
                         MA
                     </div>
                     <h5 class="fw-bold mb-1">Md. Amanuddin</h5>
-                    <p class="text-info small fw-semibold mb-2">Team Member 2</p>
-                    <p class="text-muted small">Java Servlets Controller Layer, JDBC PreparedStatement, Fine & Queue Logic.</p>
+                    <p class="text-info small fw-semibold mb-2">Team Member 1 (MEM-2024-001)</p>
+                    <p class="text-muted small">System Architecture, Java Servlets MVC Controllers, JDBC PreparedStatement, Fine & Queue Logic.</p>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-5">
                 <div class="glass-card p-4 text-center h-100 card-hover-lift">
                     <div class="rounded-circle bg-navy text-white d-flex align-items-center justify-content-center mx-auto mb-3 fw-bold fs-3 shadow" style="background: var(--dlms-navy); width: 72px; height: 72px;">
                         JC
                     </div>
                     <h5 class="fw-bold mb-1">Jashwanth Chowdary</h5>
-                    <p class="text-dark small fw-semibold mb-2">Team Member 3</p>
-                    <p class="text-muted small">Modern Frontend UI, Glassmorphism Styling, Chart.js Visualizations.</p>
+                    <p class="text-dark small fw-semibold mb-2">Team Member 2 (MEM-2024-002)</p>
+                    <p class="text-muted small">Modern Frontend UI/UX, Minimalist Styling, Chart.js Data Visualizations, Patron Portal Workflows.</p>
                 </div>
             </div>
         </div>
@@ -420,7 +410,7 @@
         </div>
         <div class="border-top border-white-10 pt-4 d-flex flex-column flex-md-row align-items-center justify-content-between small text-muted">
             <div>&copy; 2024 Digital Library Management System. All rights reserved.</div>
-            <div>Built by L.N.C Siddhartha, Md. Amanuddin, and Jashwanth Chowdary</div>
+            <div>Built by Md. Amanuddin and Jashwanth Chowdary</div>
         </div>
     </div>
 </footer>

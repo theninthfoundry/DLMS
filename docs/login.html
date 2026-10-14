@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" data-bs-theme="dark">
+<html lang="en" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,34 +10,31 @@
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
 </head>
-<body style="background: var(--dlms-navy-dark);">
+<body style="background-color: #FFFFFF !important; color: #000000 !important;">
 
-    <div class="min-vh-100 d-flex flex-column justify-content-center py-5 position-relative" style="background: var(--dlms-gradient-hero); overflow: hidden;">
-        <div class="hero-glow-1"></div>
-        <div class="hero-glow-2"></div>
-
-        <div class="container position-relative">
+    <div class="min-vh-100 d-flex flex-column justify-content-center py-5">
+        <div class="container">
             <div class="row justify-content-center">
-                <div class="col-md-8 col-lg-5">
+                <div class="col-md-7 col-lg-5">
                     <!-- Back Link -->
-                    <div class="mb-3 text-center text-lg-start">
-                        <a href="index.html" class="text-white-50 small text-decoration-none">
-                            <i class="bi bi-arrow-left me-1"></i> Back to Homepage
+                    <div class="mb-3">
+                        <a href="index.html" class="small fw-semibold text-dark">
+                            &larr; Back to Homepage
                         </a>
                     </div>
 
-                    <!-- Glass Login Card -->
-                    <div class="glass-card p-4 p-sm-5 border-0 shadow-2xl rounded-4" style="background: rgba(15, 23, 42, 0.88); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.12) !important;">
+                    <!-- White Card with Crisp Black Border -->
+                    <div class="glass-card p-4 p-sm-5 border border-2 border-dark rounded-3">
                         <div class="text-center mb-4">
-                            <div class="rounded-3 p-2 d-inline-flex align-items-center justify-content-center mb-2 shadow" style="background: var(--dlms-gradient-primary); width: 48px; height: 48px;">
+                            <div class="rounded-2 p-2 d-inline-flex align-items-center justify-content-center mb-2 text-white" style="background: #000000; width: 48px; height: 48px;">
                                 <i class="bi bi-book-half text-white fs-3"></i>
                             </div>
-                            <h3 class="fw-bold text-white mb-1">Welcome Back</h3>
-                            <p class="text-white-50 small">Sign in to access your digital library portal</p>
+                            <h3 class="fw-bold mb-1">Sign In to DLMS</h3>
+                            <p class="text-muted small">Academic Library Management Portal</p>
                         </div>
 
                         <!-- Alert Box -->
-                        <div id="loginAlert" class="alert alert-danger py-2 px-3 rounded-3 small d-none align-items-center gap-2 mb-3" role="alert">
+                        <div id="loginAlert" class="alert alert-danger py-2 px-3 rounded-2 small d-none align-items-center gap-2 mb-3" role="alert">
                             <i class="bi bi-exclamation-triangle-fill fs-5"></i>
                             <span id="loginAlertText"></span>
                         </div>
@@ -45,22 +42,15 @@
                         <!-- Login Form -->
                         <form id="loginForm">
                             <div class="mb-3">
-                                <label class="form-label text-white-50 small fw-semibold">Username or Email</label>
-                                <div class="input-group">
-                                    <span class="input-group-text bg-dark border-secondary text-white-50"><i class="bi bi-person"></i></span>
-                                    <input type="text" id="usernameInput" class="form-control bg-dark text-white border-secondary" placeholder="e.g. admin or siddhartha" required>
-                                </div>
+                                <label class="form-label small fw-semibold">Username or Email</label>
+                                <input type="text" id="usernameInput" class="form-control" placeholder="e.g. admin or aman" required>
                             </div>
 
                             <div class="mb-3">
-                                <label class="form-label text-white-50 small fw-semibold d-flex justify-content-between">
-                                    <span>Password</span>
-                                    <span class="text-cyan small" style="color: #38BDF8;">PBL Testing Demo</span>
-                                </label>
+                                <label class="form-label small fw-semibold">Password</label>
                                 <div class="input-group">
-                                    <span class="input-group-text bg-dark border-secondary text-white-50"><i class="bi bi-lock"></i></span>
-                                    <input type="password" id="passwordInput" class="form-control bg-dark text-white border-secondary" placeholder="Enter password" required>
-                                    <button class="btn btn-outline-secondary text-white-50 border-secondary" type="button" id="togglePasswordBtn">
+                                    <input type="password" id="passwordInput" class="form-control" placeholder="Enter password" required>
+                                    <button class="btn btn-outline-custom" type="button" id="togglePasswordBtn">
                                         <i class="bi bi-eye" id="passwordIcon"></i>
                                     </button>
                                 </div>
@@ -68,39 +58,37 @@
 
                             <div class="d-flex align-items-center justify-content-between mb-4">
                                 <div class="form-check">
-                                    <input class="form-check-input bg-dark border-secondary" type="checkbox" id="rememberMe" checked>
-                                    <label class="form-check-label text-white-50 small" for="rememberMe">Remember session</label>
+                                    <input class="form-check-input border-dark" type="checkbox" id="rememberMe" checked>
+                                    <label class="form-check-label small" for="rememberMe">Remember session</label>
                                 </div>
-                                <span class="badge bg-secondary text-white small">Secure SHA-256</span>
+                                <span class="badge border border-dark small">Secure SHA-256</span>
                             </div>
 
-                            <button type="submit" class="btn btn-gradient-primary w-100 py-2 fw-semibold fs-6 shadow">
-                                <i class="bi bi-box-arrow-in-right me-2"></i> Sign In to Account
+                            <button type="submit" class="btn btn-primary w-100 py-2 fw-semibold fs-6">
+                                Sign In &rarr;
                             </button>
                         </form>
 
                         <!-- Quick 1-Click Demo Credentials -->
-                        <div class="mt-4 pt-3 border-top border-white-10">
-                            <small class="text-white-50 d-block text-center mb-2 fw-medium">Quick Demo Credentials (1-Click Fill & Sign In):</small>
+                        <div class="mt-4 pt-3 border-top border-dark">
+                            <small class="text-muted d-block text-center mb-2 fw-bold text-uppercase">1-Click Demo Evaluation Credentials:</small>
                             <div class="row g-2">
                                 <div class="col-6">
-                                    <button type="button" class="btn btn-sm btn-outline-light w-100 py-2 d-flex align-items-center justify-content-center gap-1" id="quickAdminBtn">
-                                        <i class="bi bi-shield-lock text-warning"></i>
-                                        <span>Admin Demo</span>
+                                    <button type="button" class="btn btn-sm btn-outline-custom w-100 py-2" id="quickAdminBtn">
+                                        <i class="bi bi-shield-lock me-1"></i> Admin Demo
                                     </button>
                                 </div>
                                 <div class="col-6">
-                                    <button type="button" class="btn btn-sm btn-outline-light w-100 py-2 d-flex align-items-center justify-content-center gap-1" id="quickStudentBtn">
-                                        <i class="bi bi-mortarboard text-info"></i>
-                                        <span>Student Demo</span>
+                                    <button type="button" class="btn btn-sm btn-outline-custom w-100 py-2" id="quickStudentBtn">
+                                        <i class="bi bi-mortarboard me-1"></i> Student Demo
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="text-center mt-3 text-white-50 small">
-                        B.Tech PBL Project • Team No: 1 (Siddhartha, Amanuddin, Jashwanth)
+                    <div class="text-center mt-3 small text-muted">
+                        B.Tech PBL Project • Team: Md. Amanuddin & Jashwanth Chowdary
                     </div>
                 </div>
             </div>
@@ -119,7 +107,7 @@
                 document.getElementById('usernameInput').value = 'admin';
                 document.getElementById('passwordInput').value = 'admin123';
             } else if (roleParam === 'STUDENT') {
-                document.getElementById('usernameInput').value = 'siddhartha';
+                document.getElementById('usernameInput').value = 'aman';
                 document.getElementById('passwordInput').value = 'student123';
             }
 
@@ -144,9 +132,9 @@
             });
 
             document.getElementById('quickStudentBtn').addEventListener('click', () => {
-                document.getElementById('usernameInput').value = 'siddhartha';
+                document.getElementById('usernameInput').value = 'aman';
                 document.getElementById('passwordInput').value = 'student123';
-                doLogin('siddhartha', 'student123');
+                doLogin('aman', 'student123');
             });
 
             // Form submit

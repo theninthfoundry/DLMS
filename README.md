@@ -17,9 +17,8 @@
 
 | Roll / Member ID | Name | Role & Core Responsibilities |
 | :--- | :--- | :--- |
-| **MEM-2024-001** | **L.N.C Siddhartha** | System Architecture, Database Schema, Issue & Return Service Engine |
-| **MEM-2024-002** | **Md. Amanuddin** | Java Servlets MVC Controller, JDBC Layer, Fine & Waitlist Queue Algorithms |
-| **MEM-2024-003** | **Jashwanth Chowdary** | Frontend UI/UX, Glassmorphism Design System, Chart.js Visualizations |
+| **MEM-2024-001** | **Md. Amanuddin** | System Architecture, Java Servlets MVC Controller, JDBC Layer, Fine & Waitlist Algorithms |
+| **MEM-2024-002** | **Jashwanth Chowdary** | Frontend UI/UX, Minimalist Design System, Chart.js Visualizations, Patron Portal Workflows |
 
 ---
 
@@ -263,8 +262,7 @@ For demonstration and testing during evaluation, use these default accounts:
 | :--- | :--- | :--- | :--- | :--- |
 | **Admin Portal** | `admin` | `admin123` | `ADMIN` | Full administrative control, catalog CRUD, reports |
 | **Librarian** | `librarian` | `admin123` | `LIBRARIAN` | Circulation desk checkout, check-in, fines collection |
-| **Student** | `siddhartha` | `student123` | `STUDENT` | Patron catalog browse, loan status, queue reservations |
-| **Student** | `aman` | `student123` | `STUDENT` | Patron account |
+| **Student** | `aman` | `student123` | `STUDENT` | Patron catalog browse, loan status, queue reservations |
 | **Student** | `jashwanth` | `student123` | `STUDENT` | Patron account |
 | **Faculty** | `drrajesh` | `student123` | `FACULTY` | Faculty research account (8 books quota, 30 days) |
 
@@ -276,7 +274,7 @@ For demonstration and testing during evaluation, use these default accounts:
 
 1. **Authentication & Role Security:**
    - Log in as `admin` -> verifies redirect to `/admin/dashboard`.
-   - Log in as `siddhartha` -> verifies redirect to `/student/dashboard`.
+   - Log in as `aman` -> verifies redirect to `/student/dashboard`.
    - Try accessing `/admin/dashboard` as student -> access denied by `AuthFilter`.
 2. **Book Catalog CRUD & Search:**
    - Add a new book -> verifies instant insertion in MySQL and visibility in catalog.

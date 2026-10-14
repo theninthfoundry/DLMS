@@ -1,50 +1,24 @@
 /**
  * DIGITAL LIBRARY MANAGEMENT SYSTEM (DLMS) - CORE UI SCRIPTS
- * Theme switcher, animated stats counters, navigation, and sidebar controls.
+ * Minimalist Black & White Edition
+ * Team: Md. Amanuddin & Jashwanth Chowdary
  */
 
 document.addEventListener('DOMContentLoaded', function () {
-    initTheme();
+    // Lock to pure light / white theme
+    document.documentElement.setAttribute('data-bs-theme', 'light');
     initAnimatedCounters();
     initSidebarToggle();
     updateUserSessionUI();
 });
 
-// 1. Dark Mode / Theme Toggle
-function initTheme() {
-    const savedTheme = localStorage.getItem('dlms_theme') || 'light';
-    applyTheme(savedTheme);
-
-    const themeToggleBtn = document.getElementById('themeToggleBtn');
-    if (themeToggleBtn) {
-        themeToggleBtn.addEventListener('click', function () {
-            const currentTheme = document.documentElement.getAttribute('data-bs-theme') || 'light';
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            applyTheme(newTheme);
-            localStorage.setItem('dlms_theme', newTheme);
-        });
-    }
-}
-
-function applyTheme(theme) {
-    document.documentElement.setAttribute('data-bs-theme', theme);
-    const themeIcon = document.getElementById('themeToggleIcon');
-    if (themeIcon) {
-        if (theme === 'dark') {
-            themeIcon.className = 'bi bi-sun-fill text-warning';
-        } else {
-            themeIcon.className = 'bi bi-moon-stars-fill text-dark';
-        }
-    }
-}
-
-// 2. Animated Stats Counters
+// Animated Stats Counters
 function initAnimatedCounters() {
     const counterElements = document.querySelectorAll('.animated-counter');
     counterElements.forEach(el => {
         const target = parseFloat(el.getAttribute('data-target')) || 0;
         const isCurrency = el.classList.contains('is-currency');
-        const duration = 1200;
+        const duration = 1000;
         const startTime = performance.now();
 
         function updateCounter(currentTime) {
@@ -74,7 +48,7 @@ function initAnimatedCounters() {
     });
 }
 
-// 3. Mobile Sidebar Toggle
+// Mobile Sidebar Toggle
 function initSidebarToggle() {
     const sidebarToggleBtn = document.getElementById('sidebarToggleBtn');
     const sidebar = document.getElementById('sidebar');
@@ -85,7 +59,7 @@ function initSidebarToggle() {
     }
 }
 
-// 4. Update Header User Profile and Logout handler
+// Update Header User Profile and Logout handler
 function updateUserSessionUI() {
     if (!window.db) return;
     const user = window.db.getCurrentUser();

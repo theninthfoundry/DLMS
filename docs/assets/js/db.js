@@ -1,32 +1,30 @@
 /**
  * DIGITAL LIBRARY MANAGEMENT SYSTEM (DLMS) - BROWSER DATABASE ENGINE
- * Preloaded with production schema and seed dataset from database.sql.
- * Persists changes in localStorage with complete CRUD and transaction workflows.
+ * Minimalist Black & White Edition
+ * Team: Md. Amanuddin & Jashwanth Chowdary
  */
 
-const DLMS_STORAGE_KEY = 'dlms_database_v1';
-const DLMS_USER_KEY = 'dlms_session_user';
+const DLMS_STORAGE_KEY = 'dlms_database_v2_bw';
+const DLMS_USER_KEY = 'dlms_session_user_bw';
 
 const INITIAL_DATA = {
     users: [
         { id: 1, username: 'admin', email: 'admin@library.edu', password: 'admin123', role: 'ADMIN', memberId: null, status: 'ACTIVE' },
         { id: 2, username: 'librarian', email: 'librarian@library.edu', password: 'admin123', role: 'LIBRARIAN', memberId: null, status: 'ACTIVE' },
-        { id: 3, username: 'siddhartha', email: 'siddhartha@library.edu', password: 'student123', role: 'STUDENT', memberId: 'MEM-2024-001', status: 'ACTIVE' },
-        { id: 4, username: 'aman', email: 'amanuddin@library.edu', password: 'student123', role: 'STUDENT', memberId: 'MEM-2024-002', status: 'ACTIVE' },
-        { id: 5, username: 'jashwanth', email: 'jashwanth@library.edu', password: 'student123', role: 'STUDENT', memberId: 'MEM-2024-003', status: 'ACTIVE' },
-        { id: 6, username: 'student', email: 'student@library.edu', password: 'student123', role: 'STUDENT', memberId: 'MEM-2024-005', status: 'ACTIVE' },
-        { id: 7, username: 'drrajesh', email: 'rajesh.sharma@library.edu', password: 'student123', role: 'FACULTY', memberId: 'MEM-2024-004', status: 'ACTIVE' }
+        { id: 3, username: 'aman', email: 'amanuddin@library.edu', password: 'student123', role: 'STUDENT', memberId: 'MEM-2024-001', status: 'ACTIVE' },
+        { id: 4, username: 'jashwanth', email: 'jashwanth@library.edu', password: 'student123', role: 'STUDENT', memberId: 'MEM-2024-002', status: 'ACTIVE' },
+        { id: 5, username: 'student', email: 'student@library.edu', password: 'student123', role: 'STUDENT', memberId: 'MEM-2024-003', status: 'ACTIVE' },
+        { id: 6, username: 'drrajesh', email: 'rajesh.sharma@library.edu', password: 'student123', role: 'FACULTY', memberId: 'MEM-2024-004', status: 'ACTIVE' }
     ],
     members: [
-        { id: 1, memberId: 'MEM-2024-001', name: 'L.N.C Siddhartha', email: 'siddhartha@library.edu', phone: '+91 98765 43210', department: 'Computer Science & Engineering', year: '3rd Year', memberType: 'STUDENT', maxBorrowLimit: 4, registrationDate: '2024-01-10', status: 'ACTIVE' },
-        { id: 2, memberId: 'MEM-2024-002', name: 'Md. Amanuddin', email: 'amanuddin@library.edu', phone: '+91 98765 43211', department: 'Computer Science & Engineering', year: '3rd Year', memberType: 'STUDENT', maxBorrowLimit: 4, registrationDate: '2024-01-10', status: 'ACTIVE' },
-        { id: 3, memberId: 'MEM-2024-003', name: 'Jashwanth Chowdary', email: 'jashwanth@library.edu', phone: '+91 98765 43212', department: 'Computer Science & Engineering', year: '3rd Year', memberType: 'STUDENT', maxBorrowLimit: 4, registrationDate: '2024-01-12', status: 'ACTIVE' },
+        { id: 1, memberId: 'MEM-2024-001', name: 'Md. Amanuddin', email: 'amanuddin@library.edu', phone: '+91 98765 43211', department: 'Computer Science & Engineering', year: '3rd Year', memberType: 'STUDENT', maxBorrowLimit: 4, registrationDate: '2024-01-10', status: 'ACTIVE' },
+        { id: 2, memberId: 'MEM-2024-002', name: 'Jashwanth Chowdary', email: 'jashwanth@library.edu', phone: '+91 98765 43212', department: 'Computer Science & Engineering', year: '3rd Year', memberType: 'STUDENT', maxBorrowLimit: 4, registrationDate: '2024-01-12', status: 'ACTIVE' },
+        { id: 3, memberId: 'MEM-2024-003', name: 'Priya Nair', email: 'priya.nair@library.edu', phone: '+91 98765 22334', department: 'Electronics & Communication', year: '2nd Year', memberType: 'STUDENT', maxBorrowLimit: 4, registrationDate: '2024-02-15', status: 'ACTIVE' },
         { id: 4, memberId: 'MEM-2024-004', name: 'Dr. Rajesh Sharma', email: 'rajesh.sharma@library.edu', phone: '+91 98765 11223', department: 'Information Technology', year: 'Associate Professor', memberType: 'FACULTY', maxBorrowLimit: 8, registrationDate: '2023-08-01', status: 'ACTIVE' },
-        { id: 5, memberId: 'MEM-2024-005', name: 'Priya Nair', email: 'priya.nair@library.edu', phone: '+91 98765 22334', department: 'Electronics & Communication', year: '2nd Year', memberType: 'STUDENT', maxBorrowLimit: 4, registrationDate: '2024-02-15', status: 'ACTIVE' },
-        { id: 6, memberId: 'MEM-2024-006', name: 'Rohan Verma', email: 'rohan.verma@library.edu', phone: '+91 98765 33445', department: 'Mechanical Engineering', year: '4th Year', memberType: 'STUDENT', maxBorrowLimit: 4, registrationDate: '2023-09-05', status: 'ACTIVE' },
-        { id: 7, memberId: 'MEM-2024-007', name: 'Prof. Ananya Sen', email: 'ananya.sen@library.edu', phone: '+91 98765 44556', department: 'Computer Science & Engineering', year: 'Professor & HOD', memberType: 'FACULTY', maxBorrowLimit: 8, registrationDate: '2023-07-20', status: 'ACTIVE' },
-        { id: 8, memberId: 'MEM-2024-008', name: 'Kavita Reddy', email: 'kavita.reddy@library.edu', phone: '+91 98765 55667', department: 'Data Science & AI', year: '1st Year', memberType: 'STUDENT', maxBorrowLimit: 4, registrationDate: '2024-08-20', status: 'ACTIVE' },
-        { id: 9, memberId: 'MEM-2024-009', name: 'Vikram Aditya', email: 'vikram.aditya@library.edu', phone: '+91 98765 66778', department: 'Civil Engineering', year: '3rd Year', memberType: 'STUDENT', maxBorrowLimit: 4, registrationDate: '2024-03-01', status: 'ACTIVE' }
+        { id: 5, memberId: 'MEM-2024-005', name: 'Rohan Verma', email: 'rohan.verma@library.edu', phone: '+91 98765 33445', department: 'Mechanical Engineering', year: '4th Year', memberType: 'STUDENT', maxBorrowLimit: 4, registrationDate: '2023-09-05', status: 'ACTIVE' },
+        { id: 6, memberId: 'MEM-2024-006', name: 'Prof. Ananya Sen', email: 'ananya.sen@library.edu', phone: '+91 98765 44556', department: 'Computer Science & Engineering', year: 'Professor & HOD', memberType: 'FACULTY', maxBorrowLimit: 8, registrationDate: '2023-07-20', status: 'ACTIVE' },
+        { id: 7, memberId: 'MEM-2024-007', name: 'Kavita Reddy', email: 'kavita.reddy@library.edu', phone: '+91 98765 55667', department: 'Data Science & AI', year: '1st Year', memberType: 'STUDENT', maxBorrowLimit: 4, registrationDate: '2024-08-20', status: 'ACTIVE' },
+        { id: 8, memberId: 'MEM-2024-008', name: 'Vikram Aditya', email: 'vikram.aditya@library.edu', phone: '+91 98765 66778', department: 'Civil Engineering', year: '3rd Year', memberType: 'STUDENT', maxBorrowLimit: 4, registrationDate: '2024-03-01', status: 'ACTIVE' }
     ],
     books: [
         { id: 1, bookId: 'BK-1001', isbn: '978-0262033848', title: 'Introduction to Algorithms (CLRS)', author: 'Thomas H. Cormen, Charles E. Leiserson', category: 'Computer Science', publisher: 'MIT Press', publicationYear: 2022, language: 'English', description: 'The leading textbook on computer algorithms, covering dynamic programming, greedy algorithms, graph theory, and advanced data structures.', shelfNumber: 'CS-A1-04', quantity: 5, availableCopies: 3, status: 'AVAILABLE', coverUrl: 'https://images.unsplash.com/photo-1532012164546-f432f2e3777a?w=400&q=80' },
@@ -54,19 +52,19 @@ const INITIAL_DATA = {
         { id: 3, transactionId: 'TXN-2024-1003', memberId: 'MEM-2024-001', bookId: 'BK-1004', issueDate: '2024-10-01', dueDate: '2024-10-15', returnDate: null, fine: 0.00, status: 'ISSUED', issuedBy: 'admin', remarks: 'Active loan' },
         { id: 4, transactionId: 'TXN-2024-1004', memberId: 'MEM-2024-002', bookId: 'BK-1001', issueDate: '2024-10-02', dueDate: '2024-10-16', returnDate: null, fine: 0.00, status: 'ISSUED', issuedBy: 'admin', remarks: 'Active loan' },
         { id: 5, transactionId: 'TXN-2024-1005', memberId: 'MEM-2024-003', bookId: 'BK-1006', issueDate: '2024-09-28', dueDate: '2024-10-12', returnDate: null, fine: 0.00, status: 'ISSUED', issuedBy: 'admin', remarks: 'Active loan' },
-        { id: 6, transactionId: 'TXN-2024-1006', memberId: 'MEM-2024-005', bookId: 'BK-1005', issueDate: '2024-09-10', dueDate: '2024-09-24', returnDate: null, fine: 65.00, status: 'OVERDUE', issuedBy: 'admin', remarks: 'Overdue by 13 days' },
-        { id: 7, transactionId: 'TXN-2024-1007', memberId: 'MEM-2024-006', bookId: 'BK-1010', issueDate: '2024-09-12', dueDate: '2024-09-26', returnDate: null, fine: 55.00, status: 'OVERDUE', issuedBy: 'admin', remarks: 'Overdue by 11 days' },
+        { id: 6, transactionId: 'TXN-2024-1006', memberId: 'MEM-2024-003', bookId: 'BK-1005', issueDate: '2024-09-10', dueDate: '2024-09-24', returnDate: null, fine: 65.00, status: 'OVERDUE', issuedBy: 'admin', remarks: 'Overdue by 13 days' },
+        { id: 7, transactionId: 'TXN-2024-1007', memberId: 'MEM-2024-005', bookId: 'BK-1010', issueDate: '2024-09-12', dueDate: '2024-09-26', returnDate: null, fine: 55.00, status: 'OVERDUE', issuedBy: 'admin', remarks: 'Overdue by 11 days' },
         { id: 8, transactionId: 'TXN-2024-1008', memberId: 'MEM-2024-004', bookId: 'BK-1008', issueDate: '2024-09-20', dueDate: '2024-10-20', returnDate: null, fine: 0.00, status: 'ISSUED', issuedBy: 'admin', remarks: 'Faculty special borrowing period' }
     ],
     fines: [
         { id: 1, fineId: 'FN-2024-001', transactionId: 'TXN-2024-1002', memberId: 'MEM-2024-002', amount: 20.00, daysLate: 4, status: 'PAID', paidAt: '2024-08-23 11:32:00', paymentMode: 'UPI' },
-        { id: 2, fineId: 'FN-2024-002', transactionId: 'TXN-2024-1006', memberId: 'MEM-2024-005', amount: 65.00, daysLate: 13, status: 'UNPAID', paidAt: null, paymentMode: null },
-        { id: 3, fineId: 'FN-2024-003', transactionId: 'TXN-2024-1007', memberId: 'MEM-2024-006', amount: 55.00, daysLate: 11, status: 'UNPAID', paidAt: null, paymentMode: null }
+        { id: 2, fineId: 'FN-2024-002', transactionId: 'TXN-2024-1006', memberId: 'MEM-2024-003', amount: 65.00, daysLate: 13, status: 'UNPAID', paidAt: null, paymentMode: null },
+        { id: 3, fineId: 'FN-2024-003', transactionId: 'TXN-2024-1007', memberId: 'MEM-2024-005', amount: 55.00, daysLate: 11, status: 'UNPAID', paidAt: null, paymentMode: null }
     ],
     reservations: [
         { id: 1, reservationId: 'RES-2024-001', memberId: 'MEM-2024-001', bookId: 'BK-1005', reservationDate: '2024-09-25 14:10:00', queuePosition: 1, status: 'PENDING', expiryDate: '2024-10-25' },
-        { id: 2, reservationId: 'RES-2024-002', memberId: 'MEM-2024-003', bookId: 'BK-1005', reservationDate: '2024-09-26 10:15:00', queuePosition: 2, status: 'PENDING', expiryDate: '2024-10-26' },
-        { id: 3, reservationId: 'RES-2024-003', memberId: 'MEM-2024-002', bookId: 'BK-1010', reservationDate: '2024-09-28 16:45:00', queuePosition: 1, status: 'PENDING', expiryDate: '2024-10-28' }
+        { id: 2, reservationId: 'RES-2024-002', memberId: 'MEM-2024-002', bookId: 'BK-1005', reservationDate: '2024-09-26 10:15:00', queuePosition: 2, status: 'PENDING', expiryDate: '2024-10-26' },
+        { id: 3, reservationId: 'RES-2024-003', memberId: 'MEM-2024-001', bookId: 'BK-1010', reservationDate: '2024-09-28 16:45:00', queuePosition: 1, status: 'PENDING', expiryDate: '2024-10-28' }
     ]
 };
 
@@ -82,7 +80,7 @@ class DLMSDatabase {
                 return JSON.parse(raw);
             }
         } catch (e) {
-            console.warn('LocalStorage error or unavailable, using in-memory state.', e);
+            console.warn('LocalStorage error, using in-memory state.', e);
         }
         const clone = JSON.parse(JSON.stringify(INITIAL_DATA));
         this.save(clone);
@@ -110,8 +108,7 @@ class DLMSDatabase {
             const u = localStorage.getItem(DLMS_USER_KEY);
             if (u) return JSON.parse(u);
         } catch (e) {}
-        // Default to admin for convenience
-        return this.data.users[0];
+        return this.data.users[0]; // Admin by default
     }
 
     setCurrentUser(user) {
@@ -191,7 +188,7 @@ class DLMSDatabase {
         if (!book) return { success: false, message: 'Book not found' };
         const activeTx = this.data.transactions.find(t => t.bookId === book.bookId && t.status !== 'RETURNED');
         if (activeTx) {
-            return { success: false, message: 'Cannot delete volume: Copies are currently issued to patrons.' };
+            return { success: false, message: 'Cannot delete: Copies are currently issued to patrons.' };
         }
         this.data.books = this.data.books.filter(b => b.id != id);
         this.save();
@@ -225,7 +222,6 @@ class DLMSDatabase {
             status: 'ACTIVE'
         };
         this.data.members.push(newMember);
-        // Also register a user record for login
         const username = member.email.split('@')[0].toLowerCase().replace(/[^a-z0-9]/g, '');
         this.data.users.push({
             id: this.data.users.length + 1,
@@ -340,7 +336,6 @@ class DLMSDatabase {
         tx.status = 'RETURNED';
         if (remarks) tx.remarks = remarks;
 
-        // Calculate fine if returned late (Rs 5.00 / day)
         if (today > tx.dueDate) {
             const daysLate = Math.max(0, Math.floor((new Date() - new Date(tx.dueDate)) / (1000 * 60 * 60 * 24)));
             const fineAmount = daysLate * 5.00;
@@ -361,14 +356,12 @@ class DLMSDatabase {
             this.data.fines.unshift(newFine);
         }
 
-        // Restore book copies
         const book = this.getBook(tx.bookId);
         if (book) {
             book.availableCopies += 1;
             book.status = 'AVAILABLE';
         }
 
-        // Check if there are waitlist reservations for this book
         const pendingRes = this.data.reservations.filter(r => r.bookId === tx.bookId && r.status === 'PENDING');
         let waitlistAlert = null;
         if (pendingRes.length > 0) {
@@ -453,7 +446,6 @@ class DLMSDatabase {
         const res = this.data.reservations.find(r => r.reservationId === reservationId || r.id == reservationId);
         if (res) {
             res.status = 'CANCELLED';
-            // Re-order queue
             const remaining = this.data.reservations.filter(r => r.bookId === res.bookId && r.status === 'PENDING' && r.queuePosition > res.queuePosition);
             remaining.forEach(r => { r.queuePosition -= 1; });
             this.save();
@@ -539,26 +531,33 @@ class DLMSDatabase {
 // Global instance
 window.db = new DLMSDatabase();
 
-// Toast helper
+// Toast helper - Pure Monochrome
 window.showToast = function (message, type = 'info') {
     let container = document.getElementById('toastContainer');
     if (!container) {
         container = document.createElement('div');
         container.id = 'toastContainer';
+        container.style.position = 'fixed';
+        container.style.top = '1.5rem';
+        container.style.right = '1.5rem';
+        container.style.zIndex = '1090';
         document.body.appendChild(container);
     }
 
     const toastDiv = document.createElement('div');
-    toastDiv.className = `toast align-items-center text-white bg-${type === 'error' ? 'danger' : type} border-0 shadow-lg mb-2`;
+    toastDiv.className = `toast align-items-center text-white bg-dark border-0 shadow-sm mb-2`;
+    toastDiv.style.background = '#000000';
+    toastDiv.style.color = '#FFFFFF';
+    toastDiv.style.border = '1px solid #000000';
     toastDiv.setAttribute('role', 'alert');
     toastDiv.setAttribute('aria-live', 'assertive');
     toastDiv.setAttribute('aria-atomic', 'true');
 
     toastDiv.innerHTML = `
-        <div class="d-flex">
-            <div class="toast-body d-flex align-items-center gap-2">
-                <i class="bi ${type === 'success' ? 'bi-check-circle-fill' : (type === 'error' ? 'bi-exclamation-triangle-fill' : 'bi-info-circle-fill')} fs-5"></i>
-                <span>${message}</span>
+        <div class="d-flex p-2">
+            <div class="toast-body d-flex align-items-center gap-2 text-white">
+                <i class="bi bi-info-circle-fill fs-5 text-white"></i>
+                <span class="text-white">${message}</span>
             </div>
             <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
