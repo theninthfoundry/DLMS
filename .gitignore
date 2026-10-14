@@ -1,0 +1,17 @@
+# Maven Build Output
+target/
+*.war
+*.ear
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.iml
+
+# OS files
+Thumbs.db
+.DS_Store
+
+# Node / Environment
+node_modules/
+.env

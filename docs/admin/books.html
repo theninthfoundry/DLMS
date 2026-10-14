@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Catalog Management - DLMS</title>
+    <!-- Bootstrap 5 CSS & Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+</head>
+<body>
+
+    <div class="dashboard-wrapper">
+        <!-- SIDEBAR -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="rounded-3 p-2 d-flex align-items-center justify-content-center" style="background: var(--dlms-gradient-primary); width: 40px; height: 40px;">
+                    <i class="bi bi-book-half text-white fs-5"></i>
+                </div>
+                <div>
+                    <div class="fw-bold text-white fs-6">DLMS<span style="color: #06B6D4;">.EDU</span></div>
+                    <small class="text-white-50" style="font-size: 11px;">Admin Console</small>
+                </div>
+            </div>
+
+            <ul class="sidebar-menu">
+                <li class="sidebar-item"><a href="dashboard.html" class="sidebar-link"><i class="bi bi-grid-1x2-fill"></i><span>Dashboard</span></a></li>
+                <li class="sidebar-item"><a href="books.html" class="sidebar-link active"><i class="bi bi-journal-album"></i><span>Book Catalog</span></a></li>
+                <li class="sidebar-item"><a href="issue-book.html" class="sidebar-link"><i class="bi bi-arrow-up-right-circle"></i><span>Issue Book</span></a></li>
+                <li class="sidebar-item"><a href="return-book.html" class="sidebar-link"><i class="bi bi-arrow-down-left-circle"></i><span>Return Book</span></a></li>
+                <li class="sidebar-item"><a href="members.html" class="sidebar-link"><i class="bi bi-people"></i><span>Patron Members</span></a></li>
+                <li class="sidebar-item"><a href="fines.html" class="sidebar-link"><i class="bi bi-cash-stack"></i><span>Fines & Penalties</span></a></li>
+                <li class="sidebar-item"><a href="reservations.html" class="sidebar-link"><i class="bi bi-hourglass-split"></i><span>Waitlist Queue</span></a></li>
+                <li class="sidebar-item"><a href="reports.html" class="sidebar-link"><i class="bi bi-bar-chart-line"></i><span>Reports & Export</span></a></li>
+                <li class="my-3 border-top border-white-10"></li>
+                <li class="sidebar-item"><a href="../student/dashboard.html" class="sidebar-link text-cyan" style="color: #38BDF8;"><i class="bi bi-mortarboard"></i><span>Student View</span></a></li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <button class="btn btn-sm btn-outline-secondary w-100 mb-2 py-1 text-white-50" onclick="if(confirm('Reset demo data to original seed?')){ db.reset(); location.reload(); }">
+                    <i class="bi bi-arrow-counterclockwise me-1"></i> Reset Data
+                </button>
+                <div class="d-flex align-items-center justify-content-between text-white-50 small">
+                    <span style="font-size: 11px;">Team No: 1</span>
+                    <a href="../login.html" class="text-danger small text-decoration-none btn-logout"><i class="bi bi-box-arrow-right me-1"></i>Logout</a>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            <!-- TOP NAVBAR -->
+            <header class="top-navbar">
+                <div class="d-flex align-items-center gap-3">
+                    <button class="btn btn-outline-secondary d-lg-none" id="sidebarToggleBtn"><i class="bi bi-list"></i></button>
+                    <div>
+                        <h4 class="fw-bold mb-0">Book Catalog Inventory</h4>
+                        <small class="text-muted">Manage academic volumes, shelf classification, and copies</small>
+                    </div>
+                </div>
+
+                <div class="d-flex align-items-center gap-2">
+                    <button class="btn btn-gradient-primary btn-sm" data-bs-toggle="modal" data-bs-target="#bookModal" onclick="prepareAddBook()">
+                        <i class="bi bi-plus-circle me-1"></i> Add New Book
+                    </button>
+                    <button class="btn btn-outline-secondary rounded-circle p-2 d-flex align-items-center justify-content-center" id="themeToggleBtn" style="width: 38px; height: 38px;">
+                        <i class="bi bi-moon-stars-fill text-dark" id="themeToggleIcon"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- CONTROLS & FILTER BAR -->
+            <div class="glass-card p-3 mb-4">
+                <div class="row g-3 align-items-center">
+                    <div class="col-md-5">
+                        <div class="search-input-group w-100">
+                            <i class="bi bi-search"></i>
+                            <input type="text" id="bookSearchInput" class="form-control" placeholder="Search by Title, Author, ISBN, or Shelf...">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-select" id="categoryFilter">
+                            <option value="ALL">All Categories</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2">
+                        <select class="form-select" id="stockFilter">
+                            <option value="ALL">All Stock</option>
+                            <option value="AVAILABLE">Available Only</option>
+                            <option value="OUT_OF_STOCK">Out of Stock</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2 text-md-end">
+                        <div class="btn-group" role="group">
+                            <button type="button" class="btn btn-outline-secondary btn-sm active" id="tableViewBtn" title="Table View">
+                                <i class="bi bi-table"></i>
+                            </button>
+                            <button type="button" class="btn btn-outline-secondary btn-sm" id="cardViewBtn" title="Card View">
+                                <i class="bi bi-grid"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- TABLE VIEW -->
+            <div class="glass-card p-4" id="tableViewContainer">
+                <div class="table-responsive">
+                    <table class="table table-custom align-middle">
+                        <thead>
+                            <tr>
+                                <th>Book ID</th>
+                                <th>Cover</th>
+                                <th>Title & Author</th>
+                                <th>Category</th>
+                                <th>Shelf</th>
+                                <th>Copies</th>
+                                <th>Status</th>
+                                <th class="text-end">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="booksTableBody">
+                            <!-- Populated via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- CARD VIEW (Hidden by default) -->
+            <div class="row g-4 d-none" id="cardViewContainer">
+                <!-- Injected via JS -->
+            </div>
+        </main>
+    </div>
+
+    <!-- ADD / EDIT BOOK MODAL -->
+    <div class="modal fade" id="bookModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content glass-card border-0">
+                <div class="modal-header border-bottom">
+                    <h5 class="modal-title fw-bold" id="bookModalTitle">Register New Book</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="bookForm">
+                    <input type="hidden" id="editBookId">
+                    <div class="modal-body p-4">
+                        <div class="row g-3">
+                            <div class="col-md-8">
+                                <label class="form-label small fw-semibold">Book Title *</label>
+                                <input type="text" id="modalTitle" class="form-control" required placeholder="e.g. Clean Architecture">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label small fw-semibold">ISBN *</label>
+                                <input type="text" id="modalIsbn" class="form-control" required placeholder="978-0132350884">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold">Author(s) *</label>
+                                <input type="text" id="modalAuthor" class="form-control" required placeholder="e.g. Robert C. Martin">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold">Subject Category *</label>
+                                <input type="text" id="modalCategory" class="form-control" required placeholder="e.g. Software Engineering">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small fw-semibold">Publisher</label>
+                                <input type="text" id="modalPublisher" class="form-control" placeholder="e.g. Prentice Hall">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label small fw-semibold">Publication Year</label>
+                                <input type="number" id="modalYear" class="form-control" value="2024">
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label small fw-semibold">Shelf Location *</label>
+                                <input type="text" id="modalShelf" class="form-control" required placeholder="CS-B2-04">
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label small fw-semibold">Total Quantity *</label>
+                                <input type="number" id="modalQuantity" class="form-control" min="1" value="4" required>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="form-label small fw-semibold">Cover Image URL</label>
+                                <input type="url" id="modalCover" class="form-control" placeholder="https://images.unsplash.com/...">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label small fw-semibold">Description / Synopsis</label>
+                                <textarea id="modalDescription" class="form-control" rows="3" placeholder="Brief outline of book topics..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer border-top">
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-gradient-primary">Save Volume</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/db.js"></script>
+    <script src="../assets/js/main.js"></script>
+    <script>
+        let currentView = 'table';
+        const bookModal = new bootstrap.Modal(document.getElementById('bookModal'));
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initCategoryDropdown();
+            renderBooks();
+
+            // Search & Filter listeners
+            document.getElementById('bookSearchInput').addEventListener('input', renderBooks);
+            document.getElementById('categoryFilter').addEventListener('change', renderBooks);
+            document.getElementById('stockFilter').addEventListener('change', renderBooks);
+
+            // View toggle
+            document.getElementById('tableViewBtn').addEventListener('click', () => switchView('table'));
+            document.getElementById('cardViewBtn').addEventListener('click', () => switchView('card'));
+
+            // Book Form Submit
+            document.getElementById('bookForm').addEventListener('submit', handleBookSubmit);
+        });
+
+        function switchView(view) {
+            currentView = view;
+            if (view === 'table') {
+                document.getElementById('tableViewContainer').classList.remove('d-none');
+                document.getElementById('cardViewContainer').classList.add('d-none');
+                document.getElementById('tableViewBtn').classList.add('active');
+                document.getElementById('cardViewBtn').classList.remove('active');
+            } else {
+                document.getElementById('tableViewContainer').classList.add('d-none');
+                document.getElementById('cardViewContainer').classList.remove('d-none');
+                document.getElementById('tableViewBtn').classList.remove('active');
+                document.getElementById('cardViewBtn').classList.add('active');
+            }
+        }
+
+        function initCategoryDropdown() {
+            const stats = db.getStats();
+            const select = document.getElementById('categoryFilter');
+            Object.keys(stats.categories).forEach(cat => {
+                const opt = document.createElement('option');
+                opt.value = cat;
+                opt.textContent = `${cat} (${stats.categories[cat]})`;
+                select.appendChild(opt);
+            });
+        }
+
+        function getFilteredBooks() {
+            const term = document.getElementById('bookSearchInput').value.toLowerCase().trim();
+            const cat = document.getElementById('categoryFilter').value;
+            const stock = document.getElementById('stockFilter').value;
+
+            return db.getBooks().filter(b => {
+                const matchSearch = !term || 
+                    b.title.toLowerCase().includes(term) ||
+                    b.author.toLowerCase().includes(term) ||
+                    b.isbn.toLowerCase().includes(term) ||
+                    b.bookId.toLowerCase().includes(term) ||
+                    b.shelfNumber.toLowerCase().includes(term);
+
+                const matchCat = cat === 'ALL' || b.category === cat;
+                const matchStock = stock === 'ALL' || (stock === 'AVAILABLE' ? b.availableCopies > 0 : b.availableCopies === 0);
+
+                return matchSearch && matchCat && matchStock;
+            });
+        }
+
+        function renderBooks() {
+            const books = getFilteredBooks();
+
+            // 1. Render Table
+            const tbody = document.getElementById('booksTableBody');
+            if (books.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="8" class="text-center py-5 text-muted">No books found matching criteria.</td></tr>`;
+            } else {
+                tbody.innerHTML = books.map(b => `
+                    <tr>
+                        <td><span class="font-monospace fw-semibold text-primary">${b.bookId}</span></td>
+                        <td>
+                            <img src="${b.coverUrl}" alt="${b.title}" class="book-thumb" onerror="this.src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&q=80'">
+                        </td>
+                        <td>
+                            <div class="fw-semibold text-truncate" style="max-width: 280px;" title="${b.title}">${b.title}</div>
+                            <small class="text-muted">${b.author} • ${b.publicationYear}</small>
+                        </td>
+                        <td><span class="badge badge-soft-info">${b.category}</span></td>
+                        <td><span class="font-monospace small">${b.shelfNumber}</span></td>
+                        <td>
+                            <strong class="${b.availableCopies > 0 ? 'text-success' : 'text-danger'}">${b.availableCopies}</strong>
+                            <span class="text-muted small">/ ${b.quantity}</span>
+                        </td>
+                        <td>
+                            <span class="badge ${b.availableCopies > 0 ? 'badge-soft-success' : 'badge-soft-danger'}">
+                                ${b.availableCopies > 0 ? 'AVAILABLE' : 'OUT OF STOCK'}
+                            </span>
+                        </td>
+                        <td class="text-end">
+                            <button class="btn btn-sm btn-outline-primary py-1 px-2 me-1" onclick="prepareEditBook(${b.id})" title="Edit">
+                                <i class="bi bi-pencil"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger py-1 px-2" onclick="handleDeleteBook(${b.id})" title="Delete">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `).join('');
+            }
+
+            // 2. Render Cards
+            const cardContainer = document.getElementById('cardViewContainer');
+            if (books.length === 0) {
+                cardContainer.innerHTML = `<div class="col-12 empty-state"><p class="text-muted">No books found.</p></div>`;
+            } else {
+                cardContainer.innerHTML = books.map(b => `
+                    <div class="col-md-6 col-lg-3">
+                        <div class="glass-card h-100 d-flex flex-column card-hover-lift overflow-hidden">
+                            <div class="position-relative">
+                                <img src="${b.coverUrl}" alt="${b.title}" class="book-card-cover" onerror="this.src='https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&q=80'">
+                                <span class="badge ${b.availableCopies > 0 ? 'bg-success' : 'bg-danger'} position-absolute top-0 end-0 m-2 shadow">
+                                    ${b.availableCopies} / ${b.quantity} Copies
+                                </span>
+                            </div>
+                            <div class="p-3 d-flex flex-column flex-grow-1">
+                                <span class="badge badge-soft-info mb-2 align-self-start">${b.category}</span>
+                                <h6 class="fw-bold text-truncate mb-1" title="${b.title}">${b.title}</h6>
+                                <p class="text-muted small text-truncate mb-2">${b.author}</p>
+                                <div class="mt-auto pt-2 border-top d-flex justify-content-between align-items-center">
+                                    <span class="font-monospace small text-muted">${b.shelfNumber}</span>
+                                    <div>
+                                        <button class="btn btn-sm btn-outline-primary py-1 px-2" onclick="prepareEditBook(${b.id})"><i class="bi bi-pencil"></i></button>
+                                        <button class="btn btn-sm btn-outline-danger py-1 px-2" onclick="handleDeleteBook(${b.id})"><i class="bi bi-trash"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        function prepareAddBook() {
+            document.getElementById('bookModalTitle').textContent = 'Register New Book in Catalog';
+            document.getElementById('editBookId').value = '';
+            document.getElementById('bookForm').reset();
+        }
+
+        function prepareEditBook(id) {
+            const b = db.getBook(id);
+            if (!b) return;
+
+            document.getElementById('bookModalTitle').textContent = `Edit Book (${b.bookId})`;
+            document.getElementById('editBookId').value = b.id;
+            document.getElementById('modalTitle').value = b.title;
+            document.getElementById('modalIsbn').value = b.isbn;
+            document.getElementById('modalAuthor').value = b.author;
+            document.getElementById('modalCategory').value = b.category;
+            document.getElementById('modalPublisher').value = b.publisher;
+            document.getElementById('modalYear').value = b.publicationYear;
+            document.getElementById('modalShelf').value = b.shelfNumber;
+            document.getElementById('modalQuantity').value = b.quantity;
+            document.getElementById('modalCover').value = b.coverUrl;
+            document.getElementById('modalDescription').value = b.description;
+
+            bookModal.show();
+        }
+
+        function handleBookSubmit(e) {
+            e.preventDefault();
+            const editId = document.getElementById('editBookId').value;
+            const bookData = {
+                title: document.getElementById('modalTitle').value,
+                isbn: document.getElementById('modalIsbn').value,
+                author: document.getElementById('modalAuthor').value,
+                category: document.getElementById('modalCategory').value,
+                publisher: document.getElementById('modalPublisher').value,
+                publicationYear: document.getElementById('modalYear').value,
+                shelfNumber: document.getElementById('modalShelf').value,
+                quantity: document.getElementById('modalQuantity').value,
+                coverUrl: document.getElementById('modalCover').value,
+                description: document.getElementById('modalDescription').value
+            };
+
+            if (editId) {
+                db.updateBook(editId, bookData);
+                showToast('Book details updated successfully!', 'success');
+            } else {
+                db.addBook(bookData);
+                showToast('New book registered in catalog!', 'success');
+            }
+
+            bookModal.hide();
+            renderBooks();
+        }
+
+        function handleDeleteBook(id) {
+            const b = db.getBook(id);
+            if (!b) return;
+
+            if (confirm(`Are you sure you want to delete "${b.title}"?`)) {
+                const res = db.deleteBook(id);
+                if (res.success) {
+                    showToast('Book deleted from catalog.', 'info');
+                    renderBooks();
+                } else {
+                    alert(res.message);
+                }
+            }
+        }
+    </script>
+</body>
+</html>
